@@ -1,0 +1,200 @@
+﻿<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,minimal-ui">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="-1">
+    <title>fzhwx开发者-有奖趣玩</title>
+    <link rel="stylesheet" type="text/css" href="m.css">
+</head>
+
+<body>
+	<!--页面-->
+	<div id="container"></div>
+	
+	<script language="javascript">
+		var openid = getParam("openid");
+		var openurl = "http://fzh2014.duapp.com/fzh/search/rank.html";
+		/*获取URL参数*/
+		function getParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null)
+			return unescape(r[2]);
+			return null;
+		}
+		/**提交分数**/
+        function dp_submitScore(score) {
+            if (score > 1) {
+               //save(score);
+            	saveScore(openid, score);
+            }
+        }
+        /**授权并保存**/
+        function save(score){
+        	//网页授权获取openid
+        	if(openid == null || openid == ""){
+        		var code = getParam("code");
+        		$.ajax({
+    				url : "http://fzh2014.duapp.com/fzh/udis?jsoncallback=?",
+    				type : "POST",
+    				data : {code : code, flag : "auth"},
+    				dataType : "jsonp",
+    				success : function(result) {
+    					openid = result.data;
+    					if(openid == ""){
+     						alert("网络不给力，请再试一次！");
+     					}else{
+     						saveScore(openid, score);
+     					}
+    				}
+        		});
+        	}else{
+        		saveScore(openid, score);
+        	}
+        }
+        /**保存分数、提示分享、查看排名**/
+        function saveScore(openid, score){
+        	$.ajax({
+				url : "http://fzh2014.duapp.com/fzh/udis?jsoncallback=?",
+				type : "POST",
+				data : {openid : openid, score : score, flag : "savescore"},
+				dataType : "jsonp",
+				success : function(data) {
+					if (data.data == "ok") {
+						//排名或分享
+						if (confirm("你一共" + score + "次从姚明身边找到李宇春，快去炫耀一下你的24k钛合金眼吧！")) {
+                        	dp_share();
+                    	}else{
+							//跳转排行页面
+							window.location.href = openurl;
+                    	}
+					}else{
+						if (confirm("你一共" + score + "次从姚明身边找到李宇春，你的24k氪金眼还没瞎嘛？快填写你的联系方式，将有机会获得奖品哦！")) {
+							//跳转填写信息页面
+							window.location.href = "http://fzh2014.duapp.com/fzh/search/page.html?openid="+openid;
+                    	}else{
+                    		//分享后看排名
+                        	dp_share();
+                    	}
+					}
+				},
+				error : function(a, b, c) {
+					alert('请再试一次！');
+				}
+			});
+        }
+        //查看排行
+        function clickMore() {
+            window.location = openurl;
+        }
+		//游戏规则
+        function clickRule() {
+            window.location = "http://fzh2014.duapp.com/fzh/search/rule.html";
+        }
+		//分享设置
+        function dp_share() {
+            document.title = "我在1分钟内" + (myData.score) + "次从姚明身边找到李宇春！你也来试试！";
+            document.getElementById("share").style.display = "";
+            window.shareData.tTitle = document.title;
+        }
+		//微信分享事件
+        window.shareData = {
+            "imgUrl": "http://fzh2014.duapp.com/fzh/search/fantrue.png",
+            "timeLineLink": "http://fzh2014.duapp.com/fzh/search/search.html?openid=fzh",
+            //"timeLineLink": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b8dc1a67050ebde&redirect_uri=http%3A%2F%2Ffzh2014.duapp.com%2Ffzh%2Fsearch%2Fsearch.htm&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect",
+            "tTitle": "人脸识别总动员-春哥在哪里？",
+            "tContent": "从一群姚明脸中快速找到李宇春脸！"
+        };
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+                WeixinJSBridge.invoke('sendAppMessage', {
+                    "img_url": window.shareData.imgUrl,
+                    "link": window.shareData.timeLineLink,
+                    "desc": window.shareData.tContent,
+                    "title": window.shareData.tTitle
+                }, onShareComplete);
+            });
+            WeixinJSBridge.on('menu:share:timeline', function (argv) {
+                WeixinJSBridge.invoke('shareTimeline', {
+                    "img_url": window.shareData.imgUrl,
+                    "img_width": "640",
+                    "img_height": "640",
+                    "link": window.shareData.timeLineLink,
+                    "desc": window.shareData.tContent,
+                    "title": window.shareData.tTitle
+                }, onShareComplete);
+            });
+        }, false);
+        //分享完成事件
+		function onShareComplete(res) {
+            setTimeout(function () {
+                document.location.href = openurl;
+            }, 500);
+        }
+    </script>
+	
+	<!--JS控制页面-->
+    <div style="display: none;">
+        <script id="tpl" type="text/html">
+		<div class="grid">
+        <div class="page hide" id="loading">
+            <div class="loading-txt"><%=loading%></div>
+        </div>
+        <div class="page hide" id="index">
+            <h1><%=title%></h1>
+
+            <div id="help"><%=help_txt%></div>
+            <div class="btns">
+                <button data-type="color" class="btn play-btn">
+                    <%=btn_start%>
+                </button>
+				<a href="javascript:void(0);"  onclick="clickMore();" class="btn btn-boyaa">
+					<%=btn_more_game%>
+				</a>
+				<a href="javascript:void(0);" onclick="clickRule();" class="btn btn-boyaa">
+					<%=btn_game_rule%>
+				</a>
+            </div>
+        </div>
+        <div class="page hide" id="room">
+            <header>
+                <span class="lv">
+                    <%=score%>
+                    <em>1</em>
+                </span>
+                <span class="time"></span>
+            </header>
+            <div id="box" class="lv1">
+            </div>
+        </div>
+        <div class="page hide" id="dialog">
+        <div class="inner">
+                <div class="content gameover">
+                    <div class="inner-content">
+                        <h3></h3>
+                        <div class="btn-wrap">
+                            <button class="btn play-btn">
+                                <%=btn_reTry%>
+                            </button>
+							<a href="javascript:void(0);" onclick="clickMore();" class="btn btn-boyaa">
+								<%=btn_more_game%>
+							</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div id=share style="display: none">
+		<img width=100% src="share.png"
+			style="position: fixed; z-index: 9999; top: 0; left: 0; display: "
+			ontouchstart="document.getElementById('share').style.display='none';" />
+	</div>
+    </script>
+    <script src="libs.js"></script>
+    <script src="main.js"></script>
+    </div>
+
+</body></html>

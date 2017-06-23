@@ -1,0 +1,216 @@
+<%@ page language="java" contentType="text/html;charset=utf-8"%>
+<%@ include file="/inc/listhead.inc"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<html>
+<head>
+<title>消息发送统计列表</title>
+<link rel="stylesheet" type="text/css" href="<%= contextPath %>/index1/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="<%= contextPath %>/index1/css/style.css" />
+<script type="text/javascript" src="<%= contextPath %>/index1/js/jquery.min.js"></script>
+<script src="<%= contextPath %>/index1/js/jquery1.83.js"> </script>
+<script src="<%= contextPath %>/index1/js/bootstrap-transition.js"></script>
+<script src="<%= contextPath %>/index1/js/bootstrap-modal.js"></script>
+<script src="<%= contextPath %>/index1/js/bootstrap-button.js"></script>
+<script src="<%= contextPath %>/index1/js/work.js"></script>
+<script src="<%=request.getContextPath()%>/js/highcharts.js"></script>
+
+<script>
+	//报表
+	$(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'area'
+            },
+			//图例
+			legend: {
+			   enabled: true, //是否显示图例
+               backgroundColor: '#FCFFC5'
+            },
+            title: {
+                text: '消息交互统计图'
+            },
+            /**subtitle: {
+                text: '来源: <a href="#">'+
+                    '广汇东湖城</a>'
+            }, */
+            xAxis: {
+            	categories: [ ${msgDate} ]
+            },
+            yAxis: {
+                title: {
+                    text: '消息交互趋势图'
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value / 1;
+                    }
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name} <b>{point.y:,.0f}</b><br/>',// {point.x}
+				crosshairs:[
+				  //横坐标
+				  {width:1,color:'green',dashStyle:'shortdot'},
+				  //纵坐标
+				  {width:1,color:'red',dashStyle:'shortdot'}
+				]
+            },
+            plotOptions: {
+			    series: {
+				    //threshold: 10000, //阀值
+					lineColor: 'red',
+					fillOpacity: 0.2 //填充透明度
+					//lineWidth: 3, //轮廓线宽
+                    //fillColor: 'green',
+				/**fillColor: {
+                    linearGradient: [0, 0, 0, 300],
+                    stops: [
+                        [0, 'rgb(69, 114, 167)'],
+                        [1, 'rgba(2,0,0,0)']
+                    ]
+                },**/
+				},
+                area: {
+				    //fillOpacity: 0.2, //填充透明度
+                    //pointStart: 10,
+					//lineColor: 'green',
+					//fillColor: 'red',
+					//标记点
+                    marker: {
+                        enabled: true,
+                        symbol: 'circle',
+                        radius: 3,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: 
+            	[{
+                    data: [ ${usrSum} ],
+                    //step: 'right',//left,right,center,true,默认false
+                    lineColor: 'blue',
+                    name: '消息发送人数'
+                 },
+                {
+                    data: [ ${msgSum} ],
+                    //color: 'red',//阴影
+                    //step: 'right',//left,right,center,true,默认false
+                    lineColor: 'gray',
+                    name: '消息发送次数'
+                },
+                {
+                    data: [ ${msgAvg} ],
+                    lineColor: 'green',
+                    name: '人均发送次数'
+                }]
+        });
+    });
+
+	function ev_check() {
+	   return checkval(window);
+	}
+	
+	function query(){
+		document.formList.action = '<%= contextPath %>/wx/msginfo_calcUserMsg.do';
+		document.formList.submit();
+	}
+
+	//下拉框保值
+    $(function(){
+         var dt = $('#dt').val();
+         $("#date").attr("value", dt);
+         
+         var slt = $("#date").get(0);
+         if(dt !=null && dt.length !=0){
+         	slt[dt-1].selected = true;
+         }
+    });
+</script>
+
+</head>
+
+<body>
+
+<s:form key="formList" cssStyle="formList" name="formList" theme="simple" onsubmit="return ev_check();">
+	<div class="wrapper">
+	<div class="rinavbg"><span class="righ_top">消息发送统计列表</span></div>
+
+	<div class="righ_cont">
+	<ul>
+		<li>
+			<span class="ju">商家</span><input disabled="disabled" value="<s:property value="#session.operator.wxpName"/>"/>
+		</li>
+		<li>
+			<span class="ju">日期</span>
+			<input id="dt" type="hidden" value="<s:property value="param._sk_date"/>"/>
+			<select name="param._sk_date" id="date">
+				<option value="1">按日</option>
+				<option value="2">按周</option>
+				<option value="3">按月</option>
+			</select>
+		</li>
+		<li>
+			<button type="button" class="btn1 bg" onclick="query()">
+				<i class=" icon-search"></i>查询</button>
+		</li>
+	</ul>
+	</div>
+	</div>
+	<div class="divmain">
+
+	<div class="biaoge" style="margin-top: 20px">
+	<table class="table table-bordered table-hover table-condensed" contenteditable="false">
+		<thead>
+			<tr width="100%" class="thead-text">
+				<th class="span2">
+					<a href="javascript:void(0);">统计时间</a>
+				</th>
+				<th class="span2">
+					<a href="javascript:void(0);">商家</a>
+				</th>
+				<th class="span2">
+					<a href="javascript:void(0);">活跃用户数</a>
+				</th>
+				<th class="span2">
+					<a href="javascript:void(0);">交互消息总量</a>
+				</th>
+				<th class="span2">
+					<a href="javascript:void(0);">人均消息交互量</a>
+				</th>
+			</tr>
+		</thead>
+
+		<s:iterator value="dp.datas" id="id" status="c">
+			<tr class="list1">
+				<td><s:property value="dp.datas[#c.index][2]" /></td>
+				<td><s:property value="#session.operator.wxpName"/></td>
+				<td><s:property value="dp.datas[#c.index][0]" /></td>
+				<td><s:property value="dp.datas[#c.index][1]" /></td>
+				<td><s:property value="dp.datas[#c.index][3]" /></td>
+			</tr>
+		</s:iterator>
+		<s:if test="dp.datas.size==0">
+			<tr align="center">
+				<td colspan="8">查无记录</td>
+			</tr>
+		</s:if>
+	</table>
+
+	</div>
+	</div>
+
+	<s:hidden name="param._orderby"/>
+    <s:hidden name="param._desc"/>
+    <s:hidden name="param._pageno"/>
+    <s:hidden name="param._pagesize"/>
+    <s:hidden name="param._queryexpress"/>
+    <input type="hidden" name="_rowcount" value="<s:property value="dp.rowCount" />"/>
+   	<div class="table_div"><%@ include file="/common/pageNav.jsp"%></div>
+</s:form>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>

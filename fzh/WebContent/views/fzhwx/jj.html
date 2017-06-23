@@ -1,0 +1,115 @@
+﻿    <!DOCTYPE html>
+    <html>
+     
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>街景地图示例</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=NUHBZ-GXXWW-D2HR6-OC63T-SXVSJ-T7FUP"></script>
+    <style type="text/css">
+    html,
+    body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px
+    }
+    #container {
+    width: 100%;
+    height: 40%
+    }
+    #panel {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    margin-left: -100px;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    }
+    </style>
+    </head>
+     
+    <body>
+    <div id="panel">
+		pano:<span id="panoid"></span>
+    </div>
+    <div id="container"></div>
+	<div style="width:100%;height:500px" id="pano_holder"></div>
+    <script type="text/javascript">
+    var radius = 1000;
+	//初始化为广州地图
+    var map = new qq.maps.Map(document.getElementById("container"), {
+		//地图的中心地理坐标
+		center: new qq.maps.LatLng(23.113899849892, 113.30119382051)
+    });
+    
+	//经纬度解析地址
+	var addr;
+	var geocoder = new soso.maps.Geocoder({
+	    complete : function(result){
+			//result.detail.address
+			var address = result.detail.addressComponents;
+			addr = address.city+address.district+address.street;
+	        //location.href = 'http://apis.map.qq.com/uri/v1/marker?marker=coord:'+evt.latLng+';title:'+location+';addr:addr&coord_type=1';
+	    }
+	});
+			
+	//在地图上添加标记
+	var marker = new qq.maps.Marker({
+        position: map.getCenter(),
+        draggable: true,//拖动标记
+        map: map
+    });
+	
+	//文本标注
+	var label = new qq.maps.Label({
+		position: map.getCenter(),
+		map: map,
+		content: '文本标注'
+	});
+	function getLable(pos){
+		//此处为调用反地址解析，此处的返回值在回调函数中
+		geocoder.getAddress(pos);
+		label.setMap(map);
+		label.setPosition(pos);
+		label.setContent(addr);
+	}
+			
+	//获取街景
+	function getPano(position){
+		//创建街景服务
+		var panoService = new qq.maps.PanoramaService();
+		//获取街景svid
+		panoService.getPano(position, 100, function(result) {
+			document.getElementById("panoid").innerHTML = result ? result.svid : "此处无街景";
+			if(result == null || result.svid == null)return;
+			var svid = result.svid;
+			//创建街景
+			var pano = new qq.maps.Panorama(document.getElementById('pano_holder'), {
+				pano: svid,
+				disableMove: false,//移动箭头显示/隐藏状态
+				pov:{
+					heading: 20,//查看器视线与正北方的水平夹角
+					pitch: 15	//查看器视线与地面的夹角
+				},
+				zoom: 1
+			});
+		});
+	}
+	
+  	//标记拖动事件
+    qq.maps.event.addListener(marker,"dragend",function(evt){
+		getPano(evt.latLng);
+		getLable(evt.latLng);
+    });
+	
+	//监听地图点击事件
+    qq.maps.event.addListener(map, 'click', function(evt) {
+		getPano(evt.latLng);
+		getLable(evt.latLng);
+    });
+    </script>
+    </body>
+     
+    </html>

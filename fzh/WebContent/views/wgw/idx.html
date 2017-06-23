@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>fzhwx开发者官网</title>
+<link rel="shortcut icon" href="http://zhihui2014.sinaapp.com/images/wx/wally.jpg"/>
+<meta name="Keywords" content="fzhwx开发者官网">
+<meta name="Description" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery-1.js"></script>
+<script type="text/javascript" src="js/swipe.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=75aa8a254d8498eceab22b5146be3c01"></script>
+<style type="text/css">
+#allmap {
+	width: 90%; height: 200px;
+	border: solid 1px #229CFA; margin:0px auto;
+}
+
+.fla_1 {float:left; width:73%; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;}
+.datatime {float:right; width:27%;}
+</style>
+	<script>
+	$(function(){
+		$("#sp1").addClass("pd9");
+		advmove("adv", "position");
+		advswipe(1);
+		advswipe(2);
+	});
+	
+	function advswipe(id){
+		var count = $("#adv"+id).find(".item").length;
+		for(var c=0;c<count;c++){
+			if(c==0){
+				$("#pos"+id).append("<li class='on'></li>");
+			}else{
+				$("#pos"+id).append("<li></li>");
+			}
+		}
+		var bullets = document.getElementById('pos'+id).getElementsByTagName('li');
+		var swipe = Swipe(document.getElementById("adv"+id),{	
+			callback: function(pos) {
+				if(pos!="null"){
+					var i = bullets.length;
+					while (i--) {
+						bullets[i].className = ' ';
+					}
+					bullets[pos].className = 'on';
+				}	
+			}
+		});
+	}
+	/*广告轮播*/
+	function advmove(id,pos){
+		var count=$("#"+id).find(".item").length;
+		if(pos!="null"){
+			for(var c=0;c<count;c++){
+				if(c==0){
+					$("#"+pos).append("<li class='on'></li>");
+				}else{
+					$("#"+pos).append("<li></li>");
+				}
+			}		
+		}
+		var bullets = document.getElementById('position').getElementsByTagName('li');
+		var slider = Swipe(document.getElementById(id), {
+			auto: 3000,
+			continuous: true,
+			callback: function(pos) {
+				if(pos!="null"){
+					var i = bullets.length;
+					while (i--) {
+						bullets[i].className = ' ';
+					}
+					bullets[pos].className = 'on';
+				}	
+			}
+		});
+	}
+	//资讯中心分类
+	function clk(sp){
+		$("#sp"+sp).addClass("pd9");
+		if(sp==1){
+			$("#sp2").removeClass("pd9");
+			$("#sp3").removeClass("pd9");
+			$("#zx2").hide();
+			$("#zx3").hide();
+		}else if(sp==2){
+			$("#sp1").removeClass("pd9");
+			$("#sp3").removeClass("pd9");
+			$("#zx1").hide();
+			$("#zx3").hide();
+		}else if(sp==3){
+			$("#sp1").removeClass("pd9");
+			$("#sp2").removeClass("pd9");
+			$("#zx1").hide();
+			$("#zx2").hide();
+		}
+		$("#zx"+sp).show();
+	}
+	//查看更多
+	function show(id){
+		var btn = $("#btn"+id).is(":visible");
+		if(btn==true){
+			$("#btn"+id).hide();
+			$("#div"+id).show();
+		}else{
+			$("#div"+id).hide();
+			$("#btn"+id).show();
+		}
+	}
+	//职位查看
+	function job(){
+		//location.href = "job.html";
+	}
+	</script>
+</head>
+<body>
+	<div class="root_div mm-page" style="position:relative">
+		<!-- 公司Logo -->
+		<div>
+			<img src="images/2.jpg" width="100%;height:80px;">
+		</div>
+		<!-- 广告轮播 -->
+		<div class="index_adv">
+			<div id="adv" class="swipe">
+			    <div style="width: 1440px;" class="swipe-wrap">
+					<div style="width: 480px; left: 0px; transition-duration: 300ms; transform: translateX(0px);" class="item">
+					<a href="http://wx.wsq.qq.com/232282146" title="" rel="external"><img src="images/20140613stnqzj.jpg" width="100%"></a>
+					</div>
+					<div style="width: 480px; left: -480px; transition-duration: 0ms; transform: translateX(480px);" class="item">
+						<a href="http://wx.wsq.qq.com/232282146" title="" rel="external"><img src="images/20140617wnemyg.jpg" width="100%"></a>
+					</div>
+					<div style="width: 480px; left: -960px; transition-duration: 300ms; transform: translateX(480px);" class="item">
+						<a href="http://wx.wsq.qq.com/232282146" title="" rel="external"><img src="images/20140613pnhlxj.jpg" width="100%"></a>
+					</div>
+					<div style="width: 480px; left: -960px; transition-duration: 300ms; transform: translateX(480px);" class="item">
+						<a href="http://wx.wsq.qq.com/232282146" title="" rel="external"><img src="images/4.jpg" width="100%"></a>
+					</div>
+					<div style="width: 480px; left: -960px; transition-duration: 300ms; transform: translateX(480px);" class="item">
+						<a href="http://wx.wsq.qq.com/232282146" title="" rel="external"><img src="images/5.jpg" width="100%"></a>
+					</div>
+				</div>
+			  <div class="flash"><ul id="position"></ul></div>
+			</div>
+		</div>
+		
+		<div style="background:#229CFA;margin-bottom:0" class="mb10">
+			<!-- 产品中心 -->
+			<div class="mb10" style="padding:10px;background:#F4F4F4;">
+			<!--<a href="#" class="fr b" style="color:white">更多&gt;</a>-->
+			<a href="#" class="f1_3" >产品中心</a></div>
+			
+		<!-- 滑动区域 -->
+		<div class="index_adv1">
+		<div id="adv1" class="swipe">
+			<div style="width: 1440px;" class="swipe-wrap">
+				<!-- 此层包裹四个产品-->
+				<div style="width: 480px; left: 0px; transform: translateX(480px);" class="item">
+				<div class="items">
+				<ul>
+					<li>
+						<a href="product.html">
+						<div class="wrap"><img src="images/photo_03.png"/><span>我将在深秋的黎明出发，伴着铁皮车厢的摇晃</span></div>
+						</a>
+					</li>
+					<li>
+						<a href="product.html">
+						<div class="wrap"><img src="images/photo_05.png"/><span>photo_05</span></div>
+						</a>
+					</li>
+					<li>
+						<a href="product.html">
+						<div class="wrap"><img src="images/photo_09.png"/><span>photo_09</span></div>
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div>
+			<div style="width: 480px; left: 0px; transform: translateX(480px);" class="item">
+				<div class="items">
+				<ul>
+					<li>
+						<a href="#">
+						<div class="wrap"><img src="images/photo_13.png"/><span>photo_13</span></div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+						<div class="wrap"><img src="images/photo_14.png"/><span>photo_14</span></div>
+						</a>
+					</li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<div class="flash"><ul id="pos1"></ul></div>
+		</div></div>
+		<p class="clear"></p>
+		</div>
+		
+		<!-- 资讯中心 -->
+		<div style="background:#D3F2FF;margin-bottom:0" class="mb10">
+			<!-- 资讯中心 -->
+			<div class="mb10" style="padding:10px;background:#F4F4F4;">
+				<a href="#" class="f1_3">资讯中心</a></div>
+			<!-- 资讯分类 -->
+			<div style="height:40px;margin-top:-10px;background:#81DAFE;">
+				<ul>
+					<li id="sp1" class="pd8" onclick="clk('1');">美文阅读</li>
+					<li id="sp2" class="pd8" onclick="clk('2');">时尚资讯</li>
+					<li id="sp3" class="pd8" onclick="clk('3');">精彩阅读</li>
+				</ul>
+			</div>
+			<!-- 行业动态 -->
+			<ul id="zx1" style="overflow:hidden;">
+				<br>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">同学聚会，聚的到底是什么？...................................................</span>
+					<span class="datatime">2014-10-16</span>
+				</li></a>
+				<a href="http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=200765858&idx=1&sn=183383b352a11ec84fce335c81a05c63#rd">
+				<li class="pd5">
+					<span class="fla_1">9个段子胜过你今年读的所有书...................................................</span>
+					<span class="datatime">2014-10-21</span>
+				</li></a>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">首发可促癌细胞增转遗传基因...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">2吨秸杆可炼1吨油...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">国内首个国际光网络节点开通...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">系统崩溃、数据丢失不用怕...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">《网传权保条例》7月施行...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>				
+				<li class="pd7" id="btn1" onclick="show(1)">查看全部</li>
+				<p class="clear"></p>
+				<!-- 隐藏的部分数据 -->
+				<div id="div1" style="display:none">
+					<a href="article.html">
+					<li class="pd5">
+					<span class="fla_1">江畔何人初见月...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">江月何年初照人...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">人生代代无穷已...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>
+				<a href="article.html">
+				<li class="pd5">
+					<span class="fla_1">江月年年望相似...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li></a>
+				<li class="pd7" onclick="show(1)">收&nbsp;&nbsp;起</li>
+				</div>
+			</ul>
+			<!-- 产品资讯 -->
+			<ul id="zx2" style="display:none;overflow:hidden">
+				<br>
+				<li class="pd5">
+					<span class="fla_1">国内首个国际光网络节点开通...................................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li>				
+				<br>
+				<li class="pd7" id="btn2" onclick="show(2)">查看全部</li>
+				<!-- 隐藏的部分数据 -->
+				<div id="div2" style="display:none">
+					<li class="pd5">
+						<span class="fla_1">江畔何人初见月..........................................</span>
+						<span class="datatime">2009-07-30</span>
+					</li>
+					<li class="pd5">
+						<span class="fla_1">江月何年初照人..........................................</span>
+						<span class="datatime">2009-07-30</span>
+					</li>
+					<li class="pd5">
+						<span class="fla_1">人生代代无穷已..........................................</span>
+						<span class="datatime">2009-07-30</span>
+					</li>
+					<li class="pd5">
+						<span class="fla_1">江月年年望相似..........................................</span>
+						<span class="datatime">2009-07-30</span>
+					</li>
+					<br>
+					<li class="pd7" onclick="show(2)">收&nbsp;&nbsp;起</li>
+				</div>
+				<p class="clear"></p>
+			</ul>
+			<!-- 精彩阅读 -->
+			<ul id="zx3" style="display:none;overflow:hidden">
+				<br>
+				<li class="pd5">
+					<span class="fla_1">精彩阅读..........................................</span>
+					<span class="datatime">2009-07-30</span>
+				</li>
+				<br>
+				<li class="pd7" id="btn3" onclick="show(3)">查看全部</li>
+				<!-- 隐藏的部分数据 -->
+				<div id="div3" style="display:none">
+					<li class="pd5">
+						<span class="fla_1">今人不见古时月..........................................</span>
+						<span class="datatime">2009-07-30</span>
+					</li>
+					<li class="pd5">
+						<span class="fla_1">今月曾经照古人..........................................</span>
+						<span class="datatime">2009-07-30</span>
+					</li>
+					<li class="pd5">
+						<span class="fla_1">古人今人若流水..........................................</span>
+						<span class="datatime">2009-07-30</span>
+					</li>
+					<li class="pd5">
+						<span class="fla_1">	共看明月皆如此..........................................</span>
+						<span class="datatime">2009-07-30</span>
+					</li>
+					<br>
+					<li class="pd7" onclick="show(3)">收&nbsp;&nbsp;起</li>
+				</div>
+			</ul>
+			<br><div class="mb10" style="padding:10px;margin-bottom:0; background:#21BEFD;height:10px"></div>
+		</div>
+		
+		<!-- 业务范围 -->
+		<div style="background:#95E0FE;" class="mb10">		
+			<div class="mb10" style="padding:10px;background:#F4F4F4;">
+			<a href="#" class="f1_3" >业务范围</a></div>
+			<ul>
+				<li class="pd6">微信订制开发</li>
+				<li class="pd5">1、微信接口二次开发</li>
+				<li class="pd5">2、微官网开发、微商城开发</li>
+				<li class="pd5">3、营销活动策划、网页游戏开发</li>
+				<li class="pd7" id="btn2" onclick="job()">查看全部</li>
+				<br></br>
+			</ul>
+			<br>
+			<div class="mb10" style="padding:10px; margin-bottom:-10px; background:#21BEFD; height:10px"></div>	
+		</div>
+		
+		<!-- 联系我们 -->
+		<div style="background:#95E0FE;" class="mb10">
+			<div class="mb10" style="padding:10px;background:#F4F4F4;">
+			<a href="#" class="f1_3">联系方式</a></div>
+			<ul>
+				<li class="pd5">
+					电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<a style="text-decoration:underline;color:#53B2FB" href="tel:15976531601"><span style="color:#718192">15976531601</span></a>
+				</li>
+				<li class="pd5">微&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;信：fzhihui</li>
+				<li class="pd5">E-MAIL：495300897@qq.com</li>
+				<div style="position:relative;">
+				<span class="pd5" style="position:absolute;">网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
+				<ul style="padding-left:4.5em">
+					<li class="pd5"><a href="http://fzh2014.duapp.com/fzh">http://fzh2014.duapp.com/fzh</a></li>
+					<li class="pd5"><a href="http://fzh2014.duapp.com/fzh/2048.html">http://fzh2014.duapp.com</a></li>
+				</ul></div>
+				<div style="position:relative;">
+				<span class="pd5" style="position:absolute;">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
+				<ul style="padding-left:4.5em">
+					<li class="pd5">广州市天河区棠下中山大道188号好又多商业广场</li>
+				</ul></div>
+				<br><div id="allmap"></div><br></br>
+			</ul>
+			<!--
+			<div style="width:100%;padding:10px 0;background:#53B2FB;bottom:0;z-index:10" align="center">
+			<a href="#" class="b f1_1" style="color:white">版权所有©fzh2014-fzhwx开发者</a></div>
+			-->
+			<!-- 固定底部 border-top:1px solid #2A69BF -->
+			<br></br>
+			<div class="b_nav" style="width:100%;padding:10px 0;background:#21BEFD;border-top:1px solid #2A69BF">
+				<a href="#" class="b f1_1" style="color:white;">版权所有©fzh2014-fzhwx开发者</a></div>
+		</div>
+	</div>
+</body></html>
+<script type="text/javascript">
+	//百度地图
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(113.38597015095, 23.132173732009);//地址坐标
+	map.centerAndZoom(point, 17);
+	//创建地址解析器实例
+	var myGeo = new BMap.Geocoder();
+	//将地址解析结果显示在地图上,并调整地图视野
+	var addr = "广州市天河区棠下中山大道188号好又多商业广场";
+	myGeo.getPoint(addr, function(point){
+		if (point) {
+			//创建信息窗口
+			var info = new BMap.InfoWindow("<br>"+addr);
+			var marker = new BMap.Marker(point);//创建标注 
+			marker.addEventListener("click", function(){this.openInfoWindow(info);});
+			map.addOverlay(marker);//将标注添加到地图中
+		}
+	}, "广州市");
+</script>

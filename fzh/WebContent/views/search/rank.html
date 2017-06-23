@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>fzhwx开发者游戏-春哥在哪里？</title>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0;">
+	<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+	<style type="text/css">
+		.bg{
+      		background:black; text-shadow:none; border-color:black
+   		}
+	</style>
+	<script type="text/javascript">
+	//加载事件才可以
+	$(function(){
+		load();
+	});
+	function showdata(data){
+		var li = "";
+		for(var i=0;i<data.length;i++){
+			var phone = data[i].name;
+			if(phone.length>8){
+				phone = phone.substring(0, 7) + "****";
+			}
+			li += '<li> ' + phone  + '&nbsp;&nbsp; ' + data[i].score + '</li>';
+		}
+		$("#listview").append(li);
+		$("#listview").listview("refresh");
+	}
+	function load(){
+		$.ajax({
+			//http://localhost:8080/fzh
+			url: 'http://fzh2014.duapp.com/fzh/udis?jsoncallback=?',
+			type: 'POST',
+			data: {flag: "crzGetRank"},
+			dataType : "jsonp",
+			success : function(data) {
+				showdata(data);
+			},
+			error : function(a, b, c) {
+				alert('请再试一次！');						
+			}
+		});
+	}
+	</script>
+</head>
+
+<body> 
+
+<div data-role="page">
+	<div data-role="header" style="background: black;">
+		<h1><span style="color: white">排 行 榜</span></h1>
+	</div>
+	<div data-role="content">
+		<ol data-role="listview" id="listview"></ol>
+	</div>
+		<p>
+		<a href="#" class="bg" data-role="button"  data-icon="back" data-rel="back">
+			<font color="white">返&nbsp;&nbsp;&nbsp;&nbsp;回</font>
+		</a>
+	<div data-role="footer" data-position="fixed" style="background: black;" data-tap-toggle="false">
+		<h1><span style="color: white">Copyright&nbsp;©&nbsp;2014-fzhwx开发者</span></h1>
+	</div>
+</div>
+
+</body>
+</html>
+

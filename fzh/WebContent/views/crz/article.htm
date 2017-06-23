@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>fzhwx开发者-精彩回顾</title>
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">	
+<link href="../css/article.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../js/data.js"></script>
+<style>.img{width:50px;height:50px;float:left}</style>
+</head>
+
+<script>
+var count = -1;
+function getLocalTime(nS) {
+	return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');//.replace(/年|月/g, "-").replace(/日/g, " "); 
+}
+function getYyyyMMdd(longT){
+	var time = new Date(parseInt(longT) * 1000);
+	return "2014-"+parseInt(time.getMonth()+1)+"-"+time.getDate();
+}
+function showData(type){
+	if(count<array.length-1){
+		count ++;
+	}else{alert("没有更多了！");return;}
+	var data = array[count];
+	var html = document.getElementById("more").innerHTML;
+	var li = '<div class="item_v1 p10 category_nav"><ul id="cate_list">';
+	for(var i=0;i<data.item.length;i++){
+		//alert(data.item[i].multi_item[0].cover);
+		var cover_pic = data.item[i].multi_item[0].cover;
+		var title = data.item[i].title;
+		var url = data.item[i].content_url + "&scene=4#wechat_redirect";
+		var img = "<img class='img' src='" + cover_pic + "'>";
+		var time = getYyyyMMdd(data.item[i].create_time);
+	
+		li +='<li><a href="'+url+'">' + img + '<span class="pl10 pt10 b f1_2">' + title
+		+ '</span><br><span class="pl10 db" style="font-size:0.8em">' + time + '</span></a><p class="clear"></p></li>';	
+	}
+	document.getElementById(type).innerHTML = li + "</ul></div>";
+	if(type=="more"){
+		html += "<br/>" +document.getElementById(type).innerHTML;
+		document.getElementById(type).innerHTML = html;
+	}
+}
+//微信相关事件
+(function(){
+	var url="http://fzh2014.duapp.com/fzh/crz/article.htm",/*分享的地址*/
+		image='https://mmbiz.qlogo.cn/mmbiz/JlUQCRkibBTGLaKTEdDsMLZ9tED5yhITuuZBCbqARxBt5s5KapQbtVezWVmmfsIIr67e4YtSQw8NWegicTicKc5CA/0',//分享图片
+		desc='终于找到了！朋友圈里最全的分享美文和爆笑图片！',//分享描述
+		title='终于找到了！朋友圈里最全的分享美文和爆笑图片'/*分享标题*/;
+	
+	if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+		init();
+	} else {
+		if (document.addEventListener) {
+			document.addEventListener("WeixinJSBridgeReady", init, false);
+		} else if (document.attachEvent) {
+			document.attachEvent("WeixinJSBridgeReady", init);
+			document.attachEvent("onWeixinJSBridgeReady", init);
+		}
+	}
+	function init(){
+		WeixinJSBridge.on("menu:share:appmessage", shareToFriend);// 监听事件 - 发给朋友
+		WeixinJSBridge.on("menu:share:timeline", shareToFriends);// 监听事件 - 朋友圈
+	}
+	function shareToFriend(){
+		WeixinJSBridge.invoke("sendAppMessage", {// 发消息给朋友，当然，也可以通过其它方式主动触发
+			appid: "",
+			img_url:image,
+			img_width: "80",
+			img_height: "80",
+			link: url,
+			desc: desc,
+			title: title
+		}, function (res) {
+			//alert(res.err_msg);
+		});
+	}
+	function shareToFriends(){
+		WeixinJSBridge.invoke("shareTimeline", {
+			img_url:image,
+			img_width: "80",
+			img_height: "80",
+			link: url,
+			desc: desc, //不显示，但是还是要传
+			title: desc
+		}, function (res) {
+			//alert(res.err_msg);
+		});
+	}
+}())
+</script>
+
+<body onload="showData('load');">
+<!--
+<div class="header">
+	<table cellpadding="0" cellspacing="0" width="100%">
+		<tbody><tr>
+			<td width="80px">
+				<a href="javascript:history.back(-1);" id="backlink" class="btn_v1 arrow">返回</a>
+			</td>
+			<td align="center">
+				商品分类</td>
+			<td width="80px">							
+			</td>
+		</tr>
+	</tbody></table>
+</div>
+-->
+
+		<div class="body_content pc5">
+			<div id="load"></div>
+			<div id="more"></div>
+			<br/>
+			<div align="center"><input style="width:80%;height:40px;border-radius:3px;border:1px solid #A4A4A4" type="button" value="加载更多" onclick="showData('more')"></div>
+		</div>	
+<!--
+<div class="b_nav">
+	<div class="nav_list">
+		<ul>
+			<li><a href="sy.htm" class="btn_home">首页</a></li>
+			<li class="bgblack"><a href="category.htm" class="btn_search_on">搜索</a></li>
+			<li><a href="http://www.hbyyvip.com/flow.php" class="btn_shop">购物车</a><span style="display: none;" class="shop_num" id="shop_num">0</span></li>
+			<li><a href="http://www.hbyyvip.com/brand.php" class="btn_brand">品牌</a></li>
+			<li><a href="http://www.hbyyvip.com/user.php" class="btn_user">我的</a></li>
+		</ul>
+		<p class="clear"></p>
+	</div>
+	<p class="clear"></p>
+</div>
+-->
+
+</body></html>

@@ -1,0 +1,15 @@
+table {
+	border: 1px solid #F5F5F5;
+	/*修正单元格之间的边框不能合并*/
+	border-collapse: collapse;
+	width: 90%;
+}
+table td {
+	border: 1px solid #F5F5F5;
+}
+table th {
+	border: 1px solid #F5F5F5;
+}
+tbody th {
+	background-color: #F5F5F5;  
+}

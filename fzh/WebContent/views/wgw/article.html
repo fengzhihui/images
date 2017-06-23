@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>fzhwx开发者官网</title>
+<link rel="shortcut icon" href="http://zhihui2014.sinaapp.com/images/wx/wally.jpg"/>
+<meta name="Keywords" content="fzhwx开发者官网">
+<meta name="Description" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery-1.js"></script>
+<script type="text/javascript" src="js/swipe.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=75aa8a254d8498eceab22b5146be3c01"></script>
+<style type="text/css">
+#allmap {
+	width: 90%; height: 200px;
+	border: solid 1px #229CFA; margin:0px auto;
+}
+</style>
+<script>
+	$(function(){
+		//ajax(1);
+	});
+	//AJAX请求
+	function ajax(type){
+		$.ajax({
+            url: "http://localhost:8080/test/GetData",
+            type: "GET",
+            data: {
+            	//参数
+				type: type
+			},
+			//预期服务器返回的数据类型
+            //dataType: "json",//html  text
+            success: function(data) {
+            	//data = [{"id":1,"title":"mary"},{"id":2,"title":"bluce"}];
+            	/*
+            	$.each(data,function(idx,item){    
+            		   alert(item.title);
+            	});*/
+            	//后台取得为字符串，故作此转化
+            	data = eval("("+data+")");
+            	var html = "";
+            	for(var key in data){
+            		html += '<li class="pd5">' + data[key].title + '</li>';
+            	 }
+            	html += '<br><li class="pd7" id="btn2" onclick="javascript:history.go(-1)">返&nbsp;&nbsp;回</li><br></br>';
+            	$("#zp").html(html);
+            },
+            error: function(a, b, c) {
+                alert("error.a==" + a + "           error.b==" + b + "           error.c==" + c);
+            }
+        });
+	}
+</script>
+</head>
+<body>
+	<div class="root_div mm-page" style="position:relative">
+		<!-- 公司Logo -->
+		<div>
+			<img src="images/1.png" width="100%;height:80px;">
+		</div>
+			
+		<div style="background:#95E0FE;" class="mb10">
+			<!-- 新闻资讯 -->
+			<div class="mb10" style="padding:10px;background:#F4F4F4;">
+			<a href="#" class="f1_3">新闻资讯</a></div>
+			<ul id="zp">
+				<img style="width:100%;" src="http://mmbiz.qpic.cn/mmbiz/JlUQCRkibBTHIbqElfDXtRwibA86tablTMB8HYO619GdQwlnGf3awaQeMvlsOG9rfyta9VI6j950974cz9TXyiaQA/640">
+				<li class="pd5">有钱有势，混得很得意的同学巴不得天天开同学会，在精神上压倒男同学，在肉体上征服女同学，将同学时期的意淫变成现实。</li>
+				<li class="pd5">1、 同学聚会的首义者以外地归来者居多，往往已经混得有几分人样。多年衣锦夜行，憋屈得厉害，这回当然在同窗前显摆显摆。他希望来的人越多越好，聚会前夜说不 定还要精读《毛主席回韶山》。确实如此，通常同城市的同学聚会的兴致并不高，或者仅限于小小圈子定时聚会，每每大聚会定是有什么人从外面回来了。但并不是 什么人都会有很强的号召力的，这个很难说。</li>
+				<li class="pd5">2、当年有些姿色的女生这回一定会脸上精描细抹，衣柜里千挑万选。如果是提前知道消息的，铁定还要饿上几天，争取能穿进那件卡腰的高级套裙。女人如此，男人也难免。</li>
+				<li class="pd5">3、抢着买单的那位多半当年穷得叮当响，或者成绩不佳。他要告诉大家，象我这样的也是可以混出来的，你们不要老眼光看人。他一定是开车来的。好车。并且他一定很愿意送每一位同学回家，一副情深义重不忘旧谊的样子。宿怨啊，宿怨啊，足见小时候的精神阴影影响到底有多大。</li>
+				<li class="pd5">4、话少的同学并不是老成持重，而是因为经历平淡且混得不好。大家谈论的新潮名词或根本不懂，或掌握不熟练。怕说错了出丑，便索性不开牙。这个倒是不一定，不能一概而论。</li>
+				<li class="pd7" id="btn2" onclick="javascript:history.go(-1)">返&nbsp;&nbsp;回</li><br></br>
+			</ul>
+			<br>
+			<div class="mb10" style="padding:10px; margin-bottom: 0; background:#21BEFD; height: 10px"></div>
+			<!-- 联系我们 -->
+			<div class="mb10" style="padding:10px;background:#F4F4F4;">
+			<a href="#" class="f1_3">联系方式</a></div>
+			<ul>
+				<li class="pd5">
+					电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<a style="text-decoration:underline;color:#53B2FB" href="tel:15976531601"><span style="color:#718192">15976531601</span></a>
+				</li>
+				<li class="pd5">微&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;信：fzhihui</li>
+				<li class="pd5">E-MAIL：495300897@qq.com</li>
+				<div style="position:relative;">
+				<span class="pd5" style="position:absolute;">网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
+				<ul style="padding-left:4.5em">
+					<li class="pd5"><a href="http://fzh2014.duapp.com/fzh">http://fzh2014.duapp.com/fzh</a></li>
+					<li class="pd5"><a href="http://fzh2014.duapp.com/fzh/2048.html">http://fzh2014.duapp.com</a></li>
+				</ul></div>
+				<div style="position:relative;">
+				<span class="pd5" style="position:absolute;">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</span>
+				<ul style="padding-left:4.5em">
+					<li class="pd5">广州市天河区棠下中山大道188号好又多商业广场</li>
+				</ul></div>
+				<br><div id="allmap"></div><br></br>
+			</ul>
+			<br></br>
+			<div class="b_nav" style="width:100%;padding:10px 0;background:#21BEFD;border-top:1px solid #2A69BF">
+				<a href="#" class="b f1_1" style="color:white;">版权所有©fzh2014-fzhwx开发者</a></div>
+		</div>
+	</div>
+</body></html>
+<script type="text/javascript">
+	//百度地图
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(113.38597015095, 23.132173732009);//地址坐标
+	map.centerAndZoom(point, 17);
+	//创建地址解析器实例
+	var myGeo = new BMap.Geocoder();
+	//将地址解析结果显示在地图上,并调整地图视野
+	var addr = "广州市天河区棠下中山大道188号好又多商业广场";
+	myGeo.getPoint(addr, function(point){
+		if (point) {
+			//创建信息窗口
+			var info = new BMap.InfoWindow("<br>"+addr);
+			var marker = new BMap.Marker(point);//创建标注 
+			marker.addEventListener("click", function(){this.openInfoWindow(info);});
+			map.addOverlay(marker);//将标注添加到地图中
+		}
+	}, "广州市");
+</script>

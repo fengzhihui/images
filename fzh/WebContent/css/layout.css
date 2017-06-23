@@ -1,0 +1,64 @@
+body{color:#666;font-size:14px;}
+a:hover{text-decoration:none;}
+
+.thsh,.sqhd,.jrcs,.bmfw{background:#f8f3e6;height:150px;line-height:150px;overflow:hidden;}
+.thsh a,.sqhd a,.jrcs a,.bmfw a{display:block;text-indent:-9999px;}
+.thsh{background:url(../images/thsh.png) center center no-repeat;}
+.sqhd{background:url(../images/sqhd.png) center center no-repeat;}
+.jrcs{background:url(../images/jrcs.png) center center no-repeat;}
+.bmfw{background:url(../images/bmfw.png) center center no-repeat;}
+.thsh,.sqhd,.jrcs,.bmfw{background-size:contain;}
+
+.memberBar_box{position:absolute;left:50%;}
+.memberBar{width:150px;height:150px;background:url(../images/shizi.png) center center no-repeat;background-size:contain;position:absolute;left:-75px;top:-75px;z-index:999;text-indent:-9999px;overflow:hidden;}
+
+.cardList li{background:#fcf2f2;border-left:5px #dFb5b4 solid;margin-bottom:15px;padding:10px;}
+.cardList li:hover{background:#f8f3e6;}
+.cardList li dl dt{font-size:16px;font-weight:normal;}
+
+.boxList li{margin-bottom:15px;border:1px #ececec solid;border-radius:7px;}
+.boxList li:hover{border-color:#666;}
+.boxList li dl dt,.boxList li dl dd{padding:10px;}
+.boxList li dl dd{border-top:1px #ececec solid;}
+.boxList li dl dd a{display:block;}
+
+.creditList li{background:#fcf2f2;margin-bottom:15px;padding:10px;}
+.creditList li:hover{background:#f8f3e6;}
+.creditList li dl dt{font-size:16px;font-weight:normal;}
+.creditList li dl dd{color:#6c6c6c;}
+
+.param ul li{border:1px #ececec solid;border-radius:7px;}
+.param ul li dl dt{padding:10px;font-weight:normal;}
+.param ul li dl dt .glyphicon{color:red;}
+.param ul li dl dd{padding:10px;border-top:1px #ececec solid;}
+.param ul li dl dt a,.param ul li dl dd a{display:block;}
+
+.glyphicon{color:#777;}
+
+/*为 bootcss 增加*/
+.navbar{line-height:45px;}
+.navbar .text-middle h4{line-height:50px;}
+
+
+.tab-left,.tab-right{overflow-x:hidden;overflow-y:auto;}
+.tab-left{background:#fff;}
+.tab-left ul li a{text-align:center;display:block;border-bottom:1px #ececec solid;}
+.tab-left ul li.active{background:#ececec;}
+.tab-right{background:#ececec;}
+.tab-right ul li a{padding-left:24px;}
+
+.scontent{border:1px #ececec solid;padding:10px;border-radius:7px;}
+
+/*会员中心*/
+.face{background:#fff;padding:5px;position:absolute;right:20px;top:-40px;}
+
+.userDongtai ul li{border-left:5px #dFb5b4 solid;background:#fcf2f2;padding:7px;margin-top:10px;}
+.userDongtai ul li:hover{background:#f8f3e6;}
+
+.btn-up{margin:0;padding:8px 0;width:100%;border-radius:0 0 5px 5px;}
+
+.huodongsNav{background:url(../images/huodongs_top.png) center center no-repeat #fff;box-shadow:1px 2px 2px #000;padding:5px 0;font-size:36px;color:#fff;}
+
+article.content{font-size:14px;line-height:28px;}
+
+.footer{padding:10px;display:block;border-top:1px #ececec solid;font-size:12px;color:#aaa;background:#fff;}

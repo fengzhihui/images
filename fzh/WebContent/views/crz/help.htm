@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>fzhwx开发者-帮助手册</title>
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">	
+<link href="../css/article.css" rel="stylesheet" type="text/css">
+<style>
+#header {
+background: #497BAE;
+padding: 8px 10px;
+font-size: 1.2em;
+color: #fff;
+font-weight: bold;
+border-bottom: 2px solid #497BAE;
+}
+</style>
+</head>
+
+<script>
+function open(id){
+			var url = "";
+			if(id=="video"){
+				url = "http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=202596301&idx=6&sn=190051cf26a933f7eda87f3bdf2fdc62#rd";
+			}else if(id=="music"){
+				url = "http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=202596301&idx=5&sn=c01f2babe234558965eabd096875cce9#rd";
+			}else if(id=="weather"){
+				url = "http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=202596301&idx=3&sn=8f7390d06cf5181dc1b9d97aec2f5a31#rd";
+			}else if(id=="getnum"){
+				url = "http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=202596301&idx=7&sn=6ce5198cad7e80a65e38b282af21c775#rd";
+			}else if(id=="getbus"){
+				url = "http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=202585095&idx=4&sn=3681907d6c5379141d6eb7bd0727dc72#rd";
+			}else if(id=="guesspic"){
+				url = "http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=202596301&idx=8&sn=8e590eeb00c62f8378d05baf865db5a9#rd";
+			}else if(id=="2048"){
+				url = "http://fzh2014.duapp.com/fzh/2048.html";
+			}else if(id=="travel"){
+				url = "http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=202585095&idx=5&sn=8f67af7d6dd2e7a442866d85150f1a8c#rd";
+			}else if(id=="history"){
+				url = "http://fzh2014.duapp.com/fzh/crz/article.htm";
+			}else if(id=="try"){
+				url = "http://mp.weixin.qq.com/s?__biz=MjM5MjM3OTY1Mw==&mid=202585095&idx=3&sn=a7c3a09ca963b4883423c20ed9d0ad8d#rd";
+			}
+			location.href = url;
+		}
+
+</script>
+
+<body>
+
+<div id="header" align="center">微信功能导航</div>
+		<div class="body_content pc5">
+			<div id="load">
+				<div class="item_v1 p10 category_nav">
+					<ul id="cate_list">
+						<li><a href="javascript:open('weather');"><span class="pl10 pt10 b f1_2">天气查询</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('video');"><span class="pl10 pt10 b f1_2">电影视频</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('music');"><span class="pl10 pt10 b f1_2">音乐搜索</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('getnum');"><span class="pl10 pt10 b f1_2">高级猜数</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('2048');"><span class="pl10 pt10 b f1_2">2048游戏</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('guesspic');"><span class="pl10 pt10 b f1_2">疯狂猜图</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('getbus');"><span class="pl10 pt10 b f1_2">公交查询</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('travel');"><span class="pl10 pt10 b f1_2">城市旅游</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('history');"><span class="pl10 pt10 b f1_2">精彩回顾</span></a>
+						<p class="clear"></p></li>
+						<li><a href="javascript:open('try');"><span class="pl10 pt10 b f1_2">体验功能</span></a>
+						<p class="clear"></p></li>
+					</ul></div>	
+			</div>
+		</div>	
+<!--
+<div class="b_nav">
+	<div class="nav_list">
+		<ul>
+			<li><a href="sy.htm" class="btn_home">首页</a></li>
+			<li class="bgblack"><a href="category.htm" class="btn_search_on">搜索</a></li>
+			<li><a href="http://www.hbyyvip.com/flow.php" class="btn_shop">购物车</a><span style="display: none;" class="shop_num" id="shop_num">0</span></li>
+			<li><a href="http://www.hbyyvip.com/brand.php" class="btn_brand">品牌</a></li>
+			<li><a href="http://www.hbyyvip.com/user.php" class="btn_user">我的</a></li>
+		</ul>
+		<p class="clear"></p>
+	</div>
+	<p class="clear"></p>
+</div>
+-->
+
+</body></html>

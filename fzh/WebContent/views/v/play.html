@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="MobileOptimized" content="320">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style"
+	content="black-translucent">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<title></title>
+	<script type="text/javascript">
+				var sUserAgent = navigator.userAgent.toLowerCase();
+				var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+				var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+				var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+				var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+				var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+				var bIsAndroid = sUserAgent.match(/android/i) == "android";
+				var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+				var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+				window.onload = function(){
+					var content = document.getElementById("content");
+					var pcContent = document.getElementById("pc-content");
+					var scan = document.getElementById("scan");
+					var qrcode = document.getElementById("qrcode");
+					if(!PCjudge()){
+						content.style.display = "none";
+						pcContent.style.display = "block";
+						document.body.style.background = "#F4F4F4";
+					}
+					else{
+						content.style.display = "block";
+						pcContent.style.display = "none";
+					}
+				};
+				function PCjudge(){
+					if (bIsIpad || bIsIphoneOs) {
+					} else if (bIsMidp || bIsUc7 || bIsUc || bIsAndroid) {
+					} else if (bIsCE || bIsWM) {
+					} else {
+						return false;
+					}
+					return true;
+				}
+			</script>
+<style type="text/css">
+#content {
+	width: 100%;
+	margin: 0 auto;
+	display: none;
+}
+
+.tit {
+	height: 60px;
+	line-height: 100px;
+	margin: 20px 0px;
+	text-align: center;
+	font-size: 16px;
+	letter-spacing: 1.2px;
+}
+
+#time {
+	margin: 10px auto;
+	font-size: 12px;
+	padding: 3px;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	background: #cecece;
+	visibility: hidden;
+}
+
+#sound {
+	position: relative;
+	left: 60px;
+	height: 35px;
+	visibility: hidden;
+	line-height: 35px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 4px;
+}
+
+#sound:before {
+	content: "∧";
+	font-size: 16px;
+	position: absolute;
+	top: 0px;
+	left: -10px;
+	background: #fff;
+	color: #eee;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+
+#sound span {
+	position: absolute;
+	right: -30px;
+	color: #ddd;
+}
+
+#sound img {
+	width: 13px;
+	position: absolute;
+	top: 8px;
+	left: 15px;
+}
+
+footer{
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	bottom: 53px;
+	width: 230px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	font-size: 14px;
+	color: #0bbc0a;
+	border: 1px solid #0bbc0a;
+	border-radius: 5px;
+	letter-spacing: 5px;
+}
+
+#pc-content {
+	width: 250px;
+	height: 266px;
+	margin: 7% auto;
+	display: none;
+}
+
+#qrcode {
+	width: 250px;
+	height: 250px;
+	margin: auto;
+	margin-top: 15%;
+}
+
+#scan {
+	font-size: 25px;
+	text-align: center;
+	color: #504848;
+}
+
+#tip {
+	width: 230px;
+	height: 35px;
+	font-size: 16px;
+	margin: 20% auto;
+	line-height: 33px;
+	text-align: center;
+	color: #41F649;
+	background-color: #fff;
+	border-left: 3px #D9D9D9 solid;
+	border-top: 3px #D9D9D9 solid;
+	border-radius: 100px;
+}
+#dir{
+	position: absolute;
+	bottom: 130px;
+	left: 0px;
+	right: 0;
+	text-align: center;
+	letter-spacing: 2px;
+	color: #ccc;
+}
+</style>
+<script type="text/javascript" src="../jssdk/jweixin-1.js"></script>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/wxinits.js"></script>
+<script type="text/javascript" src="js/friendvoice.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('footer').on('touchstart', function() {
+				stopVoiceFunc();
+				//这是录音界面
+				window.location.href = 'http://fzh2014.duapp.com/fzh/v/record.html';
+			}
+		);
+		$('#dir').on('touchstart',function(){
+			//urlDir();
+			//开启功能
+			window.location.href = "http://fzh123.sinaapp.com/page/mm.html?wxref=mp.weixin.qq.com";
+		});
+	});
+	function urlDir(){
+		var sUserAgent = navigator.userAgent.toLowerCase();
+		var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+		var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+		var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+		var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+		var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+		var bIsAndroid = sUserAgent.match(/android/i) == "android";
+		var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+		var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+				
+		if (bIsIpad || bIsIphoneOs) {
+			window.location.href = "http://fzh123.sinaapp.com/page/fzh.html";
+        }else if (bIsMidp || bIsUc7 || bIsUc || bIsAndroid){
+			window.location.href = "weixin://profile/wxexpand";
+        }else if (bIsCE || bIsWM)  {
+			window.location.href = "http://fzh123.sinaapp.com/page/fzh.html";
+        } else  {
+			window.location.href = "http://fzh123.sinaapp.com/page/fzh.html";
+        }
+	}
+</script>
+</head>
+<body>
+	<div id="pc-content">
+				<p id="scan">朋友圈语音</p>
+				<img id="qrcode" src="images/QR.png"/>
+				<div id='tip'>微信扫一扫发送朋友圈语音</div>
+			</div>
+	<div id="content">
+		<nav class="tit">
+			来自朋友圈的语音
+		</nav>
+		<time id="time"> &nbsp; </time>
+		<div id="sound">
+			<img src="images/speech.png"/> <span></span>
+		</div>
+		<p id='dir'> 启用该功能 </p>
+		<footer> 我也要发 </footer>
+	</div>
+	<!-- <div style="display: none">
+			<script src="http://s95.cnzz.com/stat.php?id=1254461321&web_id=1254461321" tppabs="http://s95.cnzz.com/stat.php?id=1254461321&web_id=1254461321" language="JavaScript"></script>
+		</div> -->
+</body>
+</html>

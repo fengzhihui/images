@@ -1,0 +1,205 @@
+	<!DOCTYPE html>
+	<html>
+		<head>
+	<meta charset="utf-8">
+	<meta name="MobileOptimized" content="320">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style"content="black-translucent">
+	<meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="format-detection" content="telephone=no" />
+	<title>朋友圈语音</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="css/me.css"/>
+	<script type="text/javascript">
+				var sUserAgent = navigator.userAgent.toLowerCase();
+				var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+				var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+				var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+				var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+				var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+				var bIsAndroid = sUserAgent.match(/android/i) == "android";
+				var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+				var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+				window.onload = function(){
+					var content = document.getElementById("content");
+					var pcContent = document.getElementById("pc-content");
+					var scan = document.getElementById("scan");
+					var qrcode = document.getElementById("qrcode");
+					if(!PCjudge()){
+						content.style.display = "none";
+						pcContent.style.display = "block";
+						document.body.style.background = "#F4F4F4";
+					}
+					else{
+						content.style.display = "block";
+						pcContent.style.display = "none";
+					}
+				};
+				function PCjudge(){
+					if (bIsIpad || bIsIphoneOs) {
+					} else if (bIsMidp || bIsUc7 || bIsUc || bIsAndroid) {
+					} else if (bIsCE || bIsWM) {
+					} else {
+						return false;
+					}
+					return true;
+				}
+			</script>
+			<style type="text/css">
+				#content{
+					display: none;
+				}
+				#pc-content{
+					width: 250px;
+					height: 266px;
+					margin:7% auto;
+					display: none;
+				}
+				#qrcode{
+					width: 250px;
+					height: 250px;
+					margin: auto;
+					margin-top: 15%;
+				}
+				#scan{
+					font-size: 25px;
+					text-align: center;
+					color: #504848;
+				}
+				#tip{
+					width: 230px;
+					height: 35px;
+					font-size: 16px;
+					margin: 20% auto;
+					line-height:33px;
+					text-align:center;
+					color: #41F649;
+					background-color:#fff;
+					border-left: 3px #D9D9D9 solid;
+					border-top: 3px #D9D9D9 solid;
+					border-radius: 100px;
+				}
+				#mysay{
+					letter-spacing: 5px;
+				}
+			</style>
+		</head>
+		<body>
+			<div id="pc-content">
+				<p id="scan">朋友圈语音</p>
+				<img id="qrcode" src="images/QR.png"/>
+				<div id='tip'>微信扫一扫发送朋友圈语音</div>
+			</div>
+			<div id="content">
+				<div id="mask"></div>
+				<nav class="tit">	
+					发送一条朋友圈语音
+				</nav>
+				<time id="time">
+					&nbsp;
+				</time>
+				
+				<section>
+					<div class="hold-sound" id="holdSound" >
+						<img src="images/sp.gif" id="holdsay">
+					</div>
+					<div id="sound">
+						<div id="aftersound">
+							<img id="speak" src="images/speechh.png"/>
+							<span></span>
+							<input type="hidden"/>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div id="record" >
+						<img src="images/voc.gif"/>
+						<p class="record_info">手指上滑，取消发送</p>
+						<!--松开手指，取消发送-->
+					</div>
+					<div id="slideRecord">
+						<span class="iconfont" >&#xe600;</span>
+						<p class="cancel-send" >松开手指，取消发送</p>
+					</div>
+					<div id="endtime">
+						<span class="over" id="over">10</span>
+						<p class="record_info" id="info" >手指上滑，取消发送</p>
+					</div>
+					<div class="shortRecord" id="shortRecord">
+						<span class="over" >!</span>
+						<p class="record_info">说话时间太短</p>
+					</div>
+				</section>
+				
+				<p class="again">重新录制</p>
+				<footer id="mysay">
+					按住录制
+				</footer>
+				<footer id="nowShare">
+					发送到朋友圈
+				</footer>
+				<div id="share" >  
+					<div class="share-b">
+						请点击右上角按钮<br />
+						<i class="pengyouq">&#xe706;</i>
+						<span>分享至朋友圈</span>
+					</div>
+					<button id="share_cancel">知　道　了</button>
+				</div>
+			</div>
+			<script src="../jssdk/jweixin-1.js" type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript" src="js/zepto.js"></script>
+			<script type="text/javascript" src="js/wxinits.js"></script>
+			<script type="text/javascript">
+				function shareFunc() {
+				    var c = document.getElementById("share");
+				    wx.uploadVoice({
+				        localId: localId,
+				        success: function(b) {
+				            nowShare.style.display = "block";
+				            wx.onMenuShareTimeline({
+				                title: recordTime + "′′",
+				                link: "http://fzh2014.duapp.com/fzh/v/play.html?serverId=" + b.serverId + "&date=" + stopTime + "&recordtime=" + recordTime,
+				                imgUrl: "http://zhihui2014.sinaapp.com/wx/images/sharetimeline.jpg",
+				                trigger: function(a) {},
+				                success: function(a) {
+									//分享成功跳转链接
+									window.location.href = "http://fzh123.sinaapp.com/page/mm.html?wxref=mp.weixin.qq.com";
+								},
+				                cancel: function(a) {},
+				                fail: function(a) {}
+				            });
+				        }
+				    });
+				}
+				function urlDir(){
+					var sUserAgent = navigator.userAgent.toLowerCase();
+					var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+					var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+					var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+					var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+					var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+					var bIsAndroid = sUserAgent.match(/android/i) == "android";
+					var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+					var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+				
+					if (bIsIpad || bIsIphoneOs) {
+						window.location.href = "http://fzh123.sinaapp.com/page/fzh.html";
+               		}else if (bIsMidp || bIsUc7 || bIsUc || bIsAndroid){
+						window.location.href = "weixin://profile/wxexpand";
+                	}else if (bIsCE || bIsWM)  {
+						window.location.href = "http://fzh123.sinaapp.com/page/fzh.html";
+                	} else  {
+						window.location.href = "http://fzh123.sinaapp.com/page/fzh.html";
+                	}
+				}
+			</script>
+			<script type="text/javascript" src="js/voice.js"></script>
+			
+		<!-- <div style="display: none">
+			<script src="http://s95.cnzz.com/stat.php?id=1254461321&web_id=1254461321" tppabs="http://s95.cnzz.com/stat.php?id=1254461321&web_id=1254461321" language="JavaScript"></script>
+		</div> -->
+		</body>
+	</html>
+	

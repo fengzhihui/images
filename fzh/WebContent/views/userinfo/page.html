@@ -1,0 +1,89 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>填写信息</title>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0;">
+	<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+	<script>
+		var openid = getParam("openid");
+		/**
+	 	* 获取URL参数
+	 	* @param name
+	 	* @returns
+	 	*/
+		function getParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null)
+			return unescape(r[2]);
+			return null;
+		}
+	
+	    function submit(){
+			var tel = $("#tel").val();
+			var name = $("#name").val();
+			
+			if(tel=="" || name==""){
+				alert("请填写完整！");
+				return;
+			}else{		
+				//提交数据
+		$.ajax({
+            url: "http://fzh2014.duapp.com/fzh/crz?jsoncallback=?",
+            //url: "http://localhost:8080/fzh/crz?jsoncallback=?",
+            type: "POST",
+            data: {
+				openid:openid, username:name, phone:tel,wxpubno:getParam("wxpubno"), flag: "save_customer", type:"杭州=风过"
+			},
+            dataType: "jsonp",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            success: function(data) {
+				if(data[0].data=="ok"){
+					alert("提交成功!");
+					window.location.href = "http://fzh2014.duapp.com/fzh/userinfo/detail.html?openid="+openid;
+					//window.location.href = "http://localhost:8080/fzh/userinfo/detail.html?openid="+openid;
+				}
+            },
+            error: function(a, b, c) {
+				alert('请再试一次！');
+                /*alert("error.a==" + a);
+				alert("error.b==" + b);
+				alert("error.c==" + c);
+				*/
+            }
+        });
+			}
+		}
+	</script>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-theme="b">
+		<h1>填写信息</h1>
+	</div>
+	<div data-role="content">
+		<p>	
+			<label for="text">姓名: </label>
+			<input type="text" name="name" id="name" value="" placeholder="Name" data-theme="d"/>
+	    </p>
+		
+		<p>   
+			<label for="number">手机: </label>
+			<input type="tel" name="tel" id="tel" value="" placeholder="Telephone" data-theme="d" />
+		</p> 
+		<p> 
+			<a href="javascript:submit();" data-role="button" data-theme="d">提交</a>
+        </p>	
+	</div>
+</div>
+
+</body>
+</html>
+

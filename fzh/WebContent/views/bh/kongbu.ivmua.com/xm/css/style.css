@@ -1,0 +1,31 @@
+/* CSS Document */
+*{margin:0; padding:0;}
+a{text-decoration:none; color:#FFF;}
+body{width:100%; max-width:420px; background:#f2f2f2; margin:0 auto; color:#FFF;-webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);-webkit-appearance:none; }
+.ym1{ background:url("../../../mmbiz.qlogo.cn/mmbiz/llLIic4IA3EvcCD2zCaDleCfjic81YNpNyIghzHQcCXedctM6LWjDp0x4oE4N9eNusYYia0xEZWDKUJd3gibZDZy9g/0-wxfmt=png.png")/*tpa=https://mmbiz.qlogo.cn/mmbiz/llLIic4IA3EvcCD2zCaDleCfjic81YNpNyIghzHQcCXedctM6LWjDp0x4oE4N9eNusYYia0xEZWDKUJd3gibZDZy9g/0?wxfmt=png*/ no-repeat #FFF; background-size:100%; position:relative;}
+.miaoshu{ padding:14px 5px; line-height:20px; font-size:14px; color:#3C0;}
+.srk{text-align:center; color:#FFF; line-height:35px; position:absolute; z-index:2; left:5%; width:90%;}
+#txt{width:160px; line-height:35px; font-size:16px; border:none; text-align:center; background:#dedede; border-radius:4px; color:#333;}
+#tijiao{width:70%; height:48px; line-height:48px; border:none; border-radius:4px; font-size:18px; font-weight:bold; color:#fffc12; background:#00ca81; -webkit-box-shadow:0 5px 1px #00a066;-webkit-appearance:none;}
+.renwu{width:100%; position:absolute; z-index:1; bottom:5px; left:0; max-width:420px; margin:0 auto;}
+
+.ym2{ background:url("../../../mmbiz.qlogo.cn/mmbiz/llLIic4IA3EvcCD2zCaDleCfjic81YNpNyQzAUcvcFXgp8Wu1VzcOz4Jicl2UQ6IIxenibjnVGfEQJB4I878AFFKqw/0-wxfmt=png.png")/*tpa=https://mmbiz.qlogo.cn/mmbiz/llLIic4IA3EvcCD2zCaDleCfjic81YNpNyQzAUcvcFXgp8Wu1VzcOz4Jicl2UQ6IIxenibjnVGfEQJB4I878AFFKqw/0?wxfmt=png*/ no-repeat; background-size:100% 100%; position:relative; display:none;}
+.tiongji{width:100%; text-align:center; padding:18px 0 7px 0; font-size:26px; color:#fcff01; font-weight:bold;}
+#def{font-size:26px; color:#FF0;}
+.shengpsj{width:96%; margin:0 auto 8px auto; padding:5px 0 0 0; font-weight:bold; line-height:21px; color:#fcff01; height:88px;}
+#shuaiji{font-weight:300; width:100%;}
+.biaogebox{margin:0 auto; width:96%;}
+.biaoge{text-align:center; line-height:20px; border:1px solid #02925e; border-top:none; border-right:none;}
+.biaoge tr td{width:25%; border:1px solid #02925e; border-bottom:none; border-left:none; padding:3px 0;}
+.jieguobankuai{background:rgba(0,0,0,0.15); padding:6px 4px; width:94%; margin:10px auto 66px auto; border-radius:8px; height:142px; overflow:auto;}
+.jieg{width:100%; margin:0 auto; color:#FFF; font-size:18px; margin-bottom:15px; font-weight:bold;}
+#shiye,#jiating,#jiankang,#xingge{color:#FFF; font-size:14px; display:block; text-indent:1em; line-height:20px; font-weight:300;}
+.tianzi{width:6.24%; height:24px; line-height:24px; display:block; background:url("../../../mmbiz.qlogo.cn/mmbiz/llLIic4IA3EvcCD2zCaDleCfjic81YNpNy5UfszWb4Sw9EgB32WwNGImibk0ePOky9NmrytLLaugX5y7oKN9dGXPQ/0-wxfmt=png.png")/*tpa=https://mmbiz.qlogo.cn/mmbiz/llLIic4IA3EvcCD2zCaDleCfjic81YNpNy5UfszWb4Sw9EgB32WwNGImibk0ePOky9NmrytLLaugX5y7oKN9dGXPQ/0?wxfmt=png*/ no-repeat; background-size:100% 100%; text-align:center; color:#F30; font-size:16px; float:left; font-weight:bold;}
+
+
+
+
+.fxpy,.gzwm{width:60%; margin:8px auto; line-height:42px; text-align:center; background:rgba(0,202,129,0.8); border-radius:8px; -webkit-box-shadow:0px 1px 1px #08ac71;}
+.fxts{position:absolute; z-index:2; background:rgba(0,0,0,0.8); width:100%; top:0; left:0; text-align:right; display:none; max-width:420px;}
+
+

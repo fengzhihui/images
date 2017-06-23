@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>万达疯狂猜图</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="../css/style.css" media="screen" rel="stylesheet" type="text/css">
+<link href="../css/layout.css" media="screen" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js" type="text/javascript"></script>
+
+</head>
+<body>
+<style type="text/css">
+body{height:100%;background:url(http://fzh2014.duapp.com/images/caitu_bg.png) repeat;}
+.caitu .title{height:45px;width:100%;background:url(http://fzh2014.duapp.com/images/topbg.jpg) left bottom repeat-x;}
+.caitu .title .level{background:url(http://fzh2014.duapp.com/images/level.png) no-repeat;background-size:100% 100%;position:absolute;width:50px;height:50px;left:45%;font-size:16px;line-height:50px;text-align:center;color:#fff;}
+.question-pic{margin:15px 40px;border:10px #0259BA solid;}
+.question-pic img{float:left;}
+.catalogue{background:url(http://fzh2014.duapp.com/images/catalogue.png) no-repeat;background-size:100% 100%;text-align:center;height:35px;line-height:25px;font-size:14px;color:#fff;position:absolute;width:50%;left:25%;top:50px;}
+.keyboard{width: 240px; height:50px;margin:0 auto 0 auto;}
+.answerbox ul li,.keyboard ul li{float:left;margin:3px;}
+.answerbox ul li a,.keyboard ul li a{display:block;background:#fff;border-radius:5px;font-size:16px;color:#000;width:34px;height:34px;overflow:hidden;text-align:center;line-height:34px;}
+.answerbox ul li a{background:#666;color:#fff;}
+.answerbox{width: 240px; margin: -10px auto 0 auto;}
+
+.xLine{height:0px;border-top:1px #111 solid;clear:both;border-bottom:1px #666 solid;overflow:hidden;margin:6px 0;}
+</style>
+<div class="caitu" align="center">
+<div class="title">
+<div class="level"></div>
+<span id="time" style="color: #fff; float: right; margin: 10px 10px 0 0;"></span>
+</div>
+<div class="question-pic clearfix">
+<div class="catalogue"></div>
+<img src="" width="100%">
+</div>
+<div class="answerbox">
+<ul id="sltans"></ul>
+</div>
+<div class="xLine"></div>
+<div class="keyboard clearfix">
+<ul></ul>
+</div>
+
+<div style="position:absolute; margin:100px 0 0 100px">
+	<input type="button" value="重 玩" style="width:100px;height:30px;font-size:14px;font-weight:bold;"
+		onclick="javascript:location.href='http://fzh2014.duapp.com/fzh/crz/test1.htm'">
+</div>
+</div>
+
+<script>
+var seconds = 0, minutes = 0, hour = 0;
+function Tshow(){
+ seconds ++;
+ if(seconds==60){ minutes ++; seconds = 0; }
+ if(minutes==60){ hour ++; }
+ document.getElementById('time').innerHTML = minutes + "' " + seconds + '"';
+}
+var timer = setInterval(Tshow,1000);
+
+var data1 = {"item":[{"id":"1","name":"CKJ"},{"id":"2","name":"CKU"},{"id":"3","name":"dazzle"},{"id":"4","name":"INTREX"},{"id":"5","name":"ESBACK"},{"id":"6","name":"GXG"},{"id":"7","name":"HAZZYS"},{"id":"8","name":"ICICLE"},{"id":"9","name":"LEE"},{"id":"10","name":"LILY"},{"id":"11","name":"Masfer"},{"id":"12","name":"OBEG"},{"id":"13","name":"SIXTY"},{"id":"14","name":"SV"},{"id":"15","name":"TH"},{"id":"16","name":"uniqlo"},{"id":"17","name":"ZARA"},{"id":"18","name":"阿迪达斯"},{"id":"19","name":"安踏"},{"id":"20","name":"哥伦比亚"},{"id":"21","name":"歌莉娅"},{"id":"22","name":"红袖"},{"id":"23","name":"杰克琼斯"},{"id":"24","name":"匡威"},{"id":"25","name":"乐町"},{"id":"26","name":"乐卡克"},{"id":"27","name":"杉杉"},{"id":"28","name":"小G"},{"id":"29","name":"伊芙丽"},{"id":"30","name":"渔"},{"id":"31","name":"增致牛仔"}]};
+
+var data2 = {"item":[{"id":"1","name":"3c4u"},{"id":"2","name":"ABS"},{"id":"3","name":"Disney"},{"id":"4","name":"ECCO"},{"id":"5","name":"GEOX"},{"id":"6","name":"IDO"},{"id":"7","name":"MQD"},{"id":"8","name":"omey"},{"id":"9","name":"vans"},{"id":"10","name":"爱法贝"},{"id":"11","name":"巴拉巴拉"},{"id":"12","name":"宝岛眼镜"},{"id":"13","name":"博士眼镜"},{"id":"14","name":"晶生晶世"},{"id":"15","name":"酷动数码"},{"id":"16","name":"老庙黄金"},{"id":"17","name":"屈臣氏"},{"id":"18","name":"热风"},{"id":"19","name":"太平鸟巢"},{"id":"20","name":"哇咔"},{"id":"21","name":"万如烟酒"},{"id":"22","name":"新星数码"},{"id":"23","name":"萱子"},{"id":"24","name":"雅贝物语"}]};
+
+var data3 = {"item":[{"id":"1","name":"abc","desc":"品牌英文全称"},{"id":"2","name":"老庙黄金","desc":"黄金世家"},{"id":"3","name":"Dazzle","desc":"意大利女装"},{"id":"4","name":"博士眼镜","desc":"总统眼镜"},{"id":"5","name":"左岸咖啡","desc":"轻声诉爱"},{"id":"6","name":"天鹅水晶","desc":"施华洛世奇的传统记号"},{"id":"7","name":"安踏","desc":"永不止步..."},{"id":"8","name":"爱茜茜里","desc":"1个冰淇淋=1个苹果的热量"},{"id":"9","name":"鸥美药妆","desc":"法国药房品牌"},{"id":"10","name":"徹思叔叔","desc":"俏皮叔叔"},{"id":"11","name":"真牛铁板烧","desc":"花式铁板烧"},{"id":"12","name":"麦当劳","desc":"McDonald's"},{"id":"13","name":"棒约翰","desc":"更好的馅料，更好的比萨"},{"id":"14","name":"大歌星","desc":"万达ktv"},{"id":"15","name":"优衣库","desc":"Unique&Clothing"}]};
+
+var one = 0;
+var beginT = 0;
+var ans = "";//答案
+var openid = "";
+var url = window.location.href;
+if(url.indexOf("openid=")!=-1){
+	openid = url.substring(url.indexOf("openid=")+7, url.length);
+}
+load();//初始化
+function load(){
+var array = [data3];
+
+ans = array[0].item[one].name;//Math.floor(Math.random()*30
+$(".catalogue").html(array[0].item[one].desc);
+
+one ++;
+
+$(".question-pic img").attr("src", "http://fzh2014.duapp.com/fzh/crz/images/"+one+".jpg");
+$(".level").html(one);
+
+if(ans.length==6){$('.answerbox').attr("style","margin-left:10%;");}
+if(ans.length==5){$('.answerbox').attr("style","margin-left:15%;");}
+if(ans.length==4){$('.answerbox').attr("style","margin-left:20%;");}
+if(ans.length==3){$('.answerbox').attr("style","margin-left:30%;");}
+if(ans.length==2){$('.answerbox').attr("style","margin-left:40%;");}
+if(ans.length==1){$('.answerbox').attr("style","margin-left:45%;");}
+
+var str = "";
+var reg = /(.)(?=.*\1)/g;//按每个字符去掉重复
+//所有答案组成的字符串
+for(var i=0;i<array[0].item.length;i++){
+	var pic = array[0].item[i];
+	str += pic.name;
+}
+var result = str.replace(reg, "").replace(ans, "");
+var anstr = "";
+//随机选出20个字符，此字符串可能包含答案中的字符
+for(var j=0;j<result.length;j++){
+	var r = Math.floor(Math.random()*result.length);
+	if(anstr.indexOf(result.charAt(r)) == -1){//随机选出不重复的字符组成字符串
+		anstr += result.charAt(r);
+	}
+	if(anstr.length==20)break;
+}
+//去掉包含答案中的字符
+for(var c=0;c<ans.length;c++){
+	if(anstr.indexOf(ans.charAt(c)) != -1){//去重
+		anstr = anstr.replace(ans.charAt(c), "");
+	}
+}
+//document.writeln("<br/><br/><br/><br/>正确答案："+ans);
+var temp = ans + anstr;
+temp = temp.substring(0, 16);//16个备选字符
+var arr = temp.match(/./g);//字符串转数组
+arr.sort(function(){ return 0.5 - Math.random() });//打乱数组
+anstr = arr.join("");//重组字符串并去掉','
+//加载答案
+for(var k=1;k<=ans.length;k++){
+	$('.answerbox ul').append('<li><a id="ans'+k+'" href="javascript:unslt('+k+');"></a></li>');
+}
+//加载18个选项
+for(var z=0;z<arr.length;z++){
+	$('.keyboard ul').append('<li><a id="answers'+z+'" href="javascript:slt('+z+');">'+arr[z]+'</a></li>');
+}
+
+}
+
+//选择答案
+function slt(id){
+	var arr = $("#sltans").find("li");
+	var size = arr.size();
+	var answers = $("#answers"+id).html();
+	//赋值
+	for(var i=1;i<=size;i++){
+		var atxt = $("#ans"+i).html();
+		if(atxt ==""){
+	        $("#ans"+i).html(answers);
+	        break;
+		}else{
+			if(i>1 && i==size){
+				$("#ans"+i).html(answers);
+			}
+		}
+	}
+	//取值
+	var str = "";
+	for(var i=1;i<=size;i++){
+		var atxt = $("#ans"+i).html();
+		str += atxt;
+	}
+	if(str == ans){
+		$("#sltans").find("a").css("background", "green");
+		setTimeout(function(){
+			$('.keyboard ul').html("");
+			$('.answerbox ul').html("");
+			$("#sltans").find("a").css("background", "gray");
+			load(one);
+		}, 300);
+		
+		if(one == 15){
+			clearInterval(timer);
+				$.ajax({
+					url : "http://fzh2014.duapp.com/fzh/crz?jsoncallback=?",
+					type : "POST",
+					data : {openid : openid, score : $("#time").html(), flag : "savescore"},
+					dataType : "jsonp",
+					success : function(data) {
+						if (data[0].data == "ok") {
+							alert("用时" + $("#time").html()
+									+ "，恭喜你通关了，你的成绩已记入系统，前三名将有神秘礼品!");
+							//排名或分享
+							window.location.href = "http://fzh2014.duapp.com/fzh/crz/rank.html";
+						}
+					},
+					error : function(a, b, c) {
+						alert('请再试一次！');
+					}
+				});
+				return;
+		}
+	}
+	if (str != ans && str.length == size) {
+		$("#sltans").find("a").css("background", "red");
+	}
+}
+
+	//取消答案
+	function unslt(id) {
+		$("#ans" + id).html("");
+		$("#sltans").find("a").css("background", "gray");
+	}
+
+	//微信相关事件
+	(function() {
+		var url = "http://fzh2014.duapp.com/fzh/crz/test.htm?openid=" + openid, /*分享的地址*/
+		image = 'https://mmbiz.qlogo.cn/mmbiz/JlUQCRkibBTGLaKTEdDsMLZ9tED5yhITuuZBCbqARxBt5s5KapQbtVezWVmmfsIIr67e4YtSQw8NWegicTicKc5CA/0', //分享图片
+		desc = '疯狂猜图，限时挑战，大奖等你拿！', //分享描述
+		title = '万达疯狂猜图'/*分享标题*/;
+
+		if (typeof WeixinJSBridge == "object"
+				&& typeof WeixinJSBridge.invoke == "function") {
+			init();
+		} else {
+			if (document.addEventListener) {
+				document.addEventListener("WeixinJSBridgeReady", init, false);
+			} else if (document.attachEvent) {
+				document.attachEvent("WeixinJSBridgeReady", init);
+				document.attachEvent("onWeixinJSBridgeReady", init);
+			}
+		}
+		function init() {
+			WeixinJSBridge.on("menu:share:appmessage", shareToFriend);// 监听事件 - 发给朋友
+			WeixinJSBridge.on("menu:share:timeline", shareToFriends);// 监听事件 - 朋友圈
+		}
+		function shareToFriend() {
+			WeixinJSBridge.invoke("sendAppMessage", {// 发消息给朋友，当然，也可以通过其它方式主动触发
+				appid : "",
+				img_url : image,
+				img_width : "80",
+				img_height : "80",
+				link : url,
+				desc : desc,
+				title : title
+			}, function(res) {
+				//alert(res.err_msg);
+			});
+		}
+		function shareToFriends() {
+			WeixinJSBridge.invoke("shareTimeline", {
+				img_url : image,
+				img_width : "80",
+				img_height : "80",
+				link : url,
+				desc : desc, //不显示，但是还是要传
+				title : desc
+			}, function(res) {
+				//alert(res.err_msg);
+			});
+		}
+	}())
+</script>
+
+
+
+</body></html>
+

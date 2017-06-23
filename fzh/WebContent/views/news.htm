@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>fzhwx开发者-新闻博览</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" /> 
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+</head>
+<body>
+  <div data-role="page" style="max-width:640px;margin:0 auto;position:static;">
+    <ul data-role="listview">
+		<li>
+			<a href="javascript:open('0')"><h3>财经频道</h3>
+			<p>权威全面、专业及时的股票、财经、证券资讯。</p>
+			<p class="ui-li-aside"><strong>8、9、13、17点</strong></p>
+		</a></li>
+		<li>
+			<a href="javascript:open('sinaent')"><h3>娱乐频道</h3>
+			<p>影视音乐、明星八卦、娱乐新闻等娱乐资讯。</p>
+			<p class="ui-li-aside"><strong>10、14、18点</strong></p>
+		</a></li>
+		<li>
+			<a href="javascript:open('sinatech')"><h3>科技频道</h3>
+			<p>科技要闻、手机产品、硬件产品、数码产品等资讯。</p>
+			<p class="ui-li-aside"><strong>11、15点</strong></p>
+		</a></li>
+		<li>
+			<a href="javascript:open('sinaworld')"><h3>国际频道</h3>  
+			<p>全球政治、经济、文化等国际新闻、环球资讯。</p>
+			<p class="ui-li-aside"><strong>12、16点</strong></p>
+		</a></li>
+		<li>
+			<a href="javascript:open('sales')"><h3>电商频道</h3>
+			<p>新闻数据、案例报告、专家观点的电商营销专题资讯。</p>
+			<p class="ui-li-aside"><strong>每晚21点</strong></p>
+		</a></li>
+		<li>
+			<a href="javascript:open('sinaedu')"><h3>教育频道</h3>  
+			<p>各类考试、公务员考试、英语四六级考试、托福、雅思等资讯。</p>
+			<p class="ui-li-aside"><strong>每晚20点</strong></p>
+		</a></li>
+		<li>
+			<a href="javascript:open('sinababy')"><h3>育儿频道</h3>  
+			<p>育儿百科、育儿常识、育儿心得、儿童早期教育等资讯。</p>
+			<p class="ui-li-aside"><strong>每晚19点</strong></p>
+		</a></li>
+    </ul>
+    <div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+		<h1>Copyright © 2013 fzhwx开发者</h1>
+	</div>
+</div>
+</body>
+<script src="../jssdk/jweixin-1.js"></script>
+<script src="../jssdk/config.js"></script>
+<script src="../jssdk/article.js"></script>
+<script>
+   window.shareData.tTitle = document.title;
+   getConfig();
+   function open(type){
+		location.href  = "http://fzh2014.duapp.com/fzh/wx/article.html?type=" + type;
+   }
+</script>
+</html>
+

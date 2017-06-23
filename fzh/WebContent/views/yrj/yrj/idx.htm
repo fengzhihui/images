@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="gb2312">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<title>微信红包</title>
+<link rel="stylesheet" href="css/fake.css?v=4">
+<script type="text/javascript" src="http://fzh2014.duapp.com/fzh/js/jquery-1.7.2.min.js"></script>
+
+</head>
+<style type="text/css">
+	.body{min-height:100%;}
+	.body::after{background:#000 url("images/bg.jpg") no-repeat center center;background-size:100% auto;}
+</style>
+<body>
+	
+	<div class="body">
+		<div class="crush"></div>
+		<dl class="main">
+			<dd><img src="images/foolredpacket/packet.png?id=1"/></dd>
+		</dl>
+	</div>
+</body>
+<audio class="audio" src="images/foolredpacket/crush0.mp3" preload="auto"></audio>
+<audio class="audio" src="images/foolredpacket/crush1.mp3" preload="auto"></audio>
+<audio class="audio" src="images/foolredpacket/crush2.mp3" preload="auto"></audio>
+
+	<input type="hidden" id="urltype" value="1"/>
+	<input type="hidden" id="followurl" value=""/>
+
+</html>
+
+<script src="http://zhihui2014.sinaapp.com/js/jweixin-1.js"></script>
+<script src="../fx/config.js"></script>
+<script type="text/javascript">
+window.shareData.appid = "wxdd5dc1ca73d8986d";
+window.shareData.jsApiList = ['onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'];
+window.shareData.jumpUrl = "http://fzh123.sinaapp.com/page/spm.html";
+window.shareData.tTitle = '恭喜发财，大吉大利！';
+window.shareData.tContent = "      查看红包";
+window.shareData.sendFriendLink = location.href;
+window.shareData.imgUrl = "http://yrj007.duapp.com/fzh/yrj/yrj/images/logo.png";
+getConfig();
+</script>
+<script type="text/javascript">
+	var count = 0;
+	$('.crush').click(function(e){
+		$('.audio')[count%3].play();
+		$(this).attr("style","background:rgba(0,0,0,.5);");
+		$(this).append('<img style="left:'+e.pageX+'px;top:'+e.pageY+'px" src="images/crush'+(count%3)+'.png" />');
+		count ++;
+		if(count == 3){
+			setTimeout("prompt()",1000); 
+		}
+	});
+
+	function share(){
+		if($('#urltype').val() == '0'){
+			window.location.href = $('#followurl').val();
+			return;
+		}
+		$('body').append('<div class="share" onclick="remove(this)">\
+			<img src="images/foolredpacket/share.png"/>\
+			<div class="clear"></div>\
+			<p class="tr">点击右上角</p>\
+			<p class="tr">让你的朋友们拆红包吧~</p>\
+			<div class="copyright"><a href="http://fzh123.sinaapp.com/page/spm.html">「够胆你就来这里」</a> </div>\
+		</div>');
+	}
+
+	function prompt(){
+		$('body').append('<div class="prompt">\
+			<div class="cont">\
+				<div class="space_30"></div>\
+				<p>别想着不劳而获，提前祝你劳动节快乐!</p>\
+				<div class="space_30"></div>\
+				<a class="btn" onclick="share()">逗一下朋友</a>\
+			</div>\
+			<div class="bg"></div>\
+		</div>');
+	}
+	
+</script> 
+<script src="../fx/jq.js"></script>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>fzhwx开发者-新闻博览</title>
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<script src="http://qqmpwx.duapp.com/sjznat/1/p/ad/judge.js"></script><!---->
+<script type="text/javascript" src="http://fzh2014.duapp.com/fzh/js/jquery.js"></script>
+<link href="http://fzh2014.duapp.com/fzh/css/article.css" rel="stylesheet" type="text/css">
+<style>
+.img{width:50px;height:50px;float:left}
+.header{background:#04be02;padding:8px 10px;font-size:1.2em;color:#fff;font-weight:bold;border-bottom:2px solid #07AB05;}
+.more{background:#04be02;color:#fff;font-size:1.2em;width:80%;height:40px;border-radius:3px;border:1px solid #07AB05;}
+</style>
+</head>
+
+<script>
+var imgUrl = "", tTitle = "", collsetId = 0, minTime = new Date().getTime(), type = getParam("type")==null?0:getParam("type");
+$(function(){
+	getData("load");
+});
+
+/**设置标题*/
+function setTitle(){
+	if(type=="sinaent"){
+    	tTitle = "fzhwx开发者-娱乐频道";
+	}else if(type=="sinaworld"){
+    	tTitle = "fzhwx开发者-国际频道";
+	}else if(type=="sinatech"){
+   	 	tTitle = "fzhwx开发者-科技频道";
+	}else if(type=="sinaedu"){
+   	 	tTitle = "fzhwx开发者-教育频道";
+	}else if(type=="sinababy"){
+   	 	tTitle = "fzhwx开发者-育儿频道";
+	}else if(type=="sales"){
+   	 	tTitle = "fzhwx开发者-电商频道";
+	}else if(type=="maoming"){
+   	 	tTitle = "fzhwx开发者-茂名频道";
+	}else{
+		tTitle = "fzhwx开发者-财经频道";
+	}
+	document.title = tTitle;
+}
+
+/**更多数据*/
+function getMore() {
+	collsetId ++;
+	if (collsetId > 4) {
+		alert('没有更多了!');
+		return;
+	}
+	getData("more");
+}
+
+/**获取URL参数*/
+function getParam(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null)
+	return unescape(r[2]);
+	return null;
+}
+
+function getLocalTime(nS) {
+	return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');//.replace(/年|月/g, "-").replace(/日/g, " "); 
+}
+
+function getArticleTime(longT){
+	var time = new Date(parseInt(longT));
+	return time.getFullYear() + "-" + parseInt(time.getMonth()+1) + "-" + time.getDate() + " " + time.getHours() + ":" + time.getMinutes();
+}
+
+function getData(t){
+	setTitle();
+	var li = '<div class="item_v1 p10 category_nav"><ul id="cate_list">';
+	$.ajax({
+		url : "http://mmnews.duapp.com/news/article?jsoncallback=?",
+		type : "GET",
+		data : {
+			minTime : minTime, type : type, flag : "getArts"
+		},
+		dataType : "jsonp",
+		success : function(data) {
+			for(var i=0;i<20;i++){
+				var img = "<img class='img' src='" + data[i].imgurl + "'>";
+				var url = "http://mmnews.duapp.com/news/page/artinfo.jsp?id=" + data[i].id;
+				var time = getArticleTime(data[i].time);
+			
+				li +='<li><a href="'+url+'">' + img + '<span class="pl10 pt10 b f1_2">' + data[i].title
+				   + '</span><br><span class="pl10 db" style="font-size:0.8em">' + time + '</span></a><p class="clear"></p></li>';	
+				if (i == data.length - 1) {
+					minTime = data[i].time;
+				}
+			}
+			document.getElementById(t).innerHTML = li + "</ul></div><br/>";
+		},
+		error : function(a, b, c) {
+			//alert("error==" + b);
+			alert('没有更多了!');
+		}
+	});
+}
+
+function simplify(){
+	window.location.href = 'http://mmnews.duapp.com/news/page/article.html?type=' + type;
+}
+</script>
+
+<body>
+<div class="header" align="center" onclick="javascript:simplify();">
+	☞ 精简模式 ☜
+</div>
+
+<div class="body_content pc5">
+	<div id="load"></div>
+	<div id="more"></div>
+	<br/>
+	<div align="center">
+		<input class="more" type="button" value="加 载 更 多" onclick="getMore()">
+	</div>
+</div>	
+<!--
+<div class="b_nav">
+	<div class="nav_list">
+		<ul>
+			<li><a href="sy.htm" class="btn_home">首页</a></li>
+			<li class="bgblack"><a href="category.htm" class="btn_search_on">搜索</a></li>
+			<li><a href="http://www.hbyyvip.com/flow.php" class="btn_shop">购物车</a><span style="display: none;" class="shop_num" id="shop_num">0</span></li>
+			<li><a href="http://www.hbyyvip.com/brand.php" class="btn_brand">品牌</a></li>
+			<li><a href="http://www.hbyyvip.com/user.php" class="btn_user">我的</a></li>
+		</ul>
+		<p class="clear"></p>
+	</div>
+	<p class="clear"></p>
+</div>
+-->
+
+</body></html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>fzhwx开发者-新闻博览</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+	</head>
+	
+	<body>
+		<div data-role="page" style="max-width:640px;margin:0 auto;position:static;">
+			<input type="hidden" id="num">
+			<div data-role="content" id="c">
+				<span id="loading">正在加载...</span>
+				<div data-role="collapsible-set" id="c0"></div>
+				<div data-role="collapsible-set" id="c1"></div>
+				<div data-role="collapsible-set" id="c2"></div>
+				<div data-role="collapsible-set" id="c3"></div>
+				<div data-role="collapsible-set" id="c4"></div>
+			</div>
+			<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h4>Copyright © 2013 fzhwx开发者</h4>
+			</div>
+		</div>
+	</body>
+	<!--JS-SDK-->
+	<script src="../jssdk/jweixin-1.js"></script>
+	<script src="../jssdk/config.js"></script>
+	<script src="../jssdk/article.js"></script>
+	<script>
+		/**初始化数据*/
+		$(function(){
+			setTitle();
+			getData(collsetId);
+			setTimeout(function(){
+				$("#loading").hide();
+			}, 500);
+			getConfig();
+		});
+	</script>
+	<script type="text/javascript">document.oncontextmenu=function(e){return false;};</script>
+</html>

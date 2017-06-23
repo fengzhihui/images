@@ -1,0 +1,74 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>用户信息</title>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0;">
+	<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+	<script type="text/javascript">
+	var openid = getParam("openid");
+	var url = "";
+	/**
+ 	* 获取URL参数
+ 	* @param name
+ 	* @returns
+ 	*/
+	function getParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+		return unescape(r[2]);
+		return null;
+	}
+	//加载事件才可以
+	$(function(){
+		load();
+	});
+	function showdata(data){
+		var li = "";
+		for(var i=0;i<data.length;i++){
+			li += '<li> ' + data[i].name + '&nbsp;&nbsp; ' + data[i].phone + '</li>';
+		}
+		$("#listview").append(li);
+		$("#listview").listview("refresh");
+	}
+	function load(){
+		$.ajax({
+			url: 'http://fzh2014.duapp.com/fzh/crz?jsoncallback=?',
+			//url: 'http://localhost:8080/fzh/crz?jsoncallback=?',
+			type: 'POST',
+			data: {flag: "customer_detail",openid:openid},
+			dataType : "jsonp",
+			success : function(data) {
+				showdata(data);
+			},
+			error : function(a, b, c) {
+				alert('请再试一次！');						
+			}
+		});
+	}
+	</script>
+</head>
+
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-theme="b">
+		<h1>个人信息</h1>
+	</div>
+	<div data-role="content">
+		<ol data-role="listview" id="listview"></ol>
+	</div>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<h1>Copyright&nbsp;©&nbsp;fzhwx开发者</h1>
+	</div>
+</div>
+
+</body>
+</html>
+

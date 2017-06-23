@@ -1,0 +1,102 @@
+﻿
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<title>快来哟~用姓名测试运势</title>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="css/style.css" tppabs="http://kongbu.ivmua.com/xm/css/style.css">
+</head>
+
+<body>
+<div class="ym1">
+	<div style="padding-top:43%;"></div>
+    <div class="miaoshu">　　亲，你知道吗，据相关人士研究，事业、家庭、健康、性格往往与你的姓名息息相关，想了解你的姓名与性格命运有着怎么样的联系呢？赶快输入名字玩玩吧！</div>
+    <div class="srk">
+    <label><br><input id="txt" placeholder="请输入姓名" type="text" value="" maxlength="4"></label><br><br>
+    <input onClick="convert(1)" id="tijiao" value="开始分析" type="button">
+    </div>
+	<div class="renwu"><img width="80%" src="css/1.png" tppabs="http://kongbu.ivmua.com/xm/css/1.png"></div>
+</div>
+
+<div class="ym2">
+    <div class="tiongji">名字得分：<span id="def"></span>&nbsp;分！</div>
+    <div class="biaogebox">
+        <table  class="biaoge" width="100%" align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>姓名</td>
+            <td id="jian_xing">**</td>
+            <td id="jian_min1">**</td>
+            <td id="jian_min2">**</td>
+          </tr>
+          <tr>
+            <td>笔画</td>
+            <td><span id="bihua_xing"></span>&nbsp;画</td>
+            <td><span id="bihua_min1"></span>&nbsp;画</td>
+            <td class="bihuabox"><span id="bihua_min2"></span>&nbsp;画</td>
+          </tr>
+          <tr>
+            <td>主运五行</td>
+            <td colspan="3" id="wuxing"></td>
+          </tr>
+        
+        </table>
+        
+    </div>
+	
+    <div class="shengpsj">生平衰吉：<br><div id="shuaiji"><span class="tianzi"></span></div></div>
+    
+    
+    <div class="jieguobankuai">
+    	<div id="gundong" style="padding:20px 0 0 0;">
+        <div class="jieg">事业：<br><span id="shiye"></span></div>
+        <div class="jieg">家庭：<br><span id="jiating"></span></div>
+        <div class="jieg">健康：<br><span id="jiankang"></span></div>
+        <div class="jieg">性格：<br><span id="xingge"></span></div>
+        </div>
+    </div>
+    
+    <div class="fxpy">分享给朋友</div>
+    <a href="http://yr007.duapp.com/fzh/1J/mm.html"><div class="gzwm">更多好玩的</div></a><br>
+    <div class="fxts"><img width="75%" src="css/0.png" tppabs="http://kongbu.ivmua.com/xm/css/0.png"></div>
+    
+</div>
+<div id="audiocontainer"></div>
+
+<script src="css/js.js" tppabs="http://kongbu.ivmua.com/xm/css/js.js"></script>
+<script src="css/bihua.js" tppabs="http://kongbu.ivmua.com/xm/css/bihua.js"></script>
+<script src="../fx/jq.js" tppabs="http://kongbu.ivmua.com/fx/jq.js"></script>
+<script src="http://yrj700.duapp.com/jssdk/jweixin-1.js"></script>
+<script src="../fx/config.js"></script>
+
+</body>
+</html>
+
+<script>
+var name = "「name」";
+gSound = 'http://imgqn.koudaitong.com/upload_files/2015/04/22/FrCOBVY_nQr42ux9LiZL3wVCsBYO.mp3';
+function playbksound(){
+	audiocontainer = document.getElementById('audiocontainer');
+	audiocontainer.innerHTML = '<audio id="bgsound" preload="meta" loop="-1" autoplay="autoplay"></audio>';
+	audio = document.getElementById('bgsound');
+	if (audio == null){
+		alert('audio 对象为空');
+	}
+	audio.src = gSound;
+	audio.play();
+}	
+playbksound();
+
+function share(){
+window.shareData.appid = "wxdd5dc1ca73d8986d";
+window.shareData.jsApiList = ['onMenuShareAppMessage','onMenuShareTimeline','hideMenuItems'];
+window.shareData.jumpUrl = "http://mp.weixin.qq.com/s?__biz=MzAxNzMwNjE4MQ==&mid=202308570&idx=5&sn=f2176d871c1fd5e7096727747f5194a0#rd";
+window.shareData.tTitle = "哇~经分析，我的名字"+name+"得了"+$("#def").text()+"分！";
+window.shareData.tContent = $("#shuaiji").text();
+window.shareData.sendFriendLink = location.href;
+window.shareData.imgUrl = "http://yrj004.duapp.com/fzh/bh/kongbu.ivmua.com/xm/css/fxtb.png";
+getConfig();
+}
+</script>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>fzhwx开发者-新闻详情</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+
+<style type="text/css">
+	//头部或尾部样式
+   .bg{
+      background:#19B919; text-shadow:none; border-color:white
+   }
+   .mg{margin:10px;}
+</style>
+</head>
+
+<body>
+	<div data-role="page" style="max-width:640px;margin:0 auto;position:static;">
+		<h2 class="mg"></h2>
+		<span class="mg"></span>
+		来源：
+		<a style="text-decoration:none;" href="javascript:location.href='http://fzh123.sinaapp.com/page/fzh.html'">fzhwx开发者</a>
+		<span id="pv" style="font-size:13px;"></span>
+		<div data-role="content">
+			<img id="img" style="width:100%" src=""/>
+			<font id="cont" size="4px" style="line-height: 20pt;"></font>
+		</div>
+		<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+			<h1>Copyright © 2013 fzhwx开发者</h1>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+var imgUrl = "", tTitle = "";
+	/*获取URL参数*/
+	function getParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+		return unescape(r[2]);
+		return null;
+	}
+	function getMore(type){
+		location.href = "http://fzh2014.duapp.com/fzh/wx/article.html?type="+type;
+	}
+	$(function(){
+		var id = getParam("id");
+		$.post("http://zhihui2014.sinaapp.com/article?jsoncallback=?",
+			{flag:"getArt", id:id},
+			function(data){
+				$("h2[class=mg]").html(data.title);
+				document.getElementsByTagName("title")[0].innerHTML = data.title;
+				$("#pv").html("&nbsp;浏览：" + data.pv);
+				$("#cont").html(data.content);
+				$("span[class=mg]").html(data.time);
+				$("#cont").html(data.content);
+				imgUrl = data.imgurl;
+				if(imgUrl.length !=0){
+					$("#cont").prepend('<img width="100%" src="' + imgUrl + '"><p>').trigger("create");	
+					$("#cont").append('<p><a href="javascript:getMore('+data.type+');" data-role="button" data-icon="info">查看更多</a>').trigger("create");
+				}
+			}
+		,"jsonp");
+	});
+</script>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>表单信息1</title>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0;">
+	<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.1.0-rc.2/jquery.mobile-1.1.0-rc.2.min.js"></script>
+	<script>
+	    function submit(){
+			var tel = $("#tel").val();
+			var name = $("#name").val();
+			
+			if(tel=="" || name==""){
+				alert("请填写完整！");
+				return;
+			}else{		
+				//提交数据
+		$.ajax({
+            url: "http://fzh2014.duapp.com/fzh/crz?jsoncallback=?",
+            type: "POST",
+            data: {
+				openid:"test_from", username:name, phone:tel, flag: "saveuser"
+			},
+            dataType: "jsonp",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            success: function(data) {
+				if(data[0].data=="ok"){
+					alert("提交成功!");
+				}
+            },
+            error: function(a, b, c) {
+				alert('请再试一次！');
+                /*alert("error.a==" + a);
+				alert("error.b==" + b);
+				alert("error.c==" + c);
+				*/
+            }
+        });
+			}
+		}
+	    
+	    //此事件改变分享跳转页面
+	    function change(){
+	    	//设置分享地址
+	    	alert("请转发给朋友！");
+	    }
+	  	//微信相关事件
+		(function() {
+			var url = "http://fzh2014.duapp.com/fzh/crz/form2.html", /*分享的地址*/
+			image = 'http://fzh2014.duapp.com/uploadimages/wally.jpg', //分享图片
+			desc = '填写信息让大家了解你', //分享描述
+			title = '请你填写信息'/*分享标题*/;
+
+			if (typeof WeixinJSBridge == "object"
+					&& typeof WeixinJSBridge.invoke == "function") {
+				init();
+			} else {
+				if (document.addEventListener) {
+					document.addEventListener("WeixinJSBridgeReady", init, false);
+				} else if (document.attachEvent) {
+					document.attachEvent("WeixinJSBridgeReady", init);
+					document.attachEvent("onWeixinJSBridgeReady", init);
+				}
+			}
+			function init() {
+				WeixinJSBridge.on("menu:share:appmessage", shareToFriend);// 监听事件 - 发给朋友
+				WeixinJSBridge.on("menu:share:timeline", shareToFriends);// 监听事件 - 朋友圈
+			}
+			function shareToFriend() {
+				WeixinJSBridge.invoke("sendAppMessage", {// 发消息给朋友，当然，也可以通过其它方式主动触发
+					appid : "",
+					img_url : image,
+					img_width : "80",
+					img_height : "80",
+					link : url,
+					desc : desc,
+					title : title
+				}, function(res) {
+					//alert(res.err_msg);
+				});
+			}
+			function shareToFriends() {
+				WeixinJSBridge.invoke("shareTimeline", {
+					img_url : image,
+					img_width : "80",
+					img_height : "80",
+					link : url,
+					desc : desc, //不显示，但是还是要传
+					title : desc
+				}, function(res) {
+					//alert(res.err_msg);
+				});
+			}
+		}())
+	</script>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-theme="b">
+		<h1>填写信息</h1>
+	</div>
+	<div data-role="content">
+		<p>	
+			<label for="text">姓名: </label>
+			<input type="text" name="name" id="name" value="" placeholder="Name" data-theme="d"/>
+	    </p>
+		
+		<p>   
+			<label for="number">手机: </label>
+			<input type="tel" name="tel" id="tel" value="" placeholder="Telephone" data-theme="d" />
+		</p> 
+		<p> 
+			<a href="javascript:submit();" data-role="button" data-theme="d">提交</a>
+        </p>
+        <p> 
+			<a href="javascript:change();" data-role="button" data-theme="d">让朋友填写</a>
+        </p>
+	</div>
+</div>
+
+</body>
+</html>
+

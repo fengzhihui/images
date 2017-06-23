@@ -1,0 +1,63 @@
+*{margin:0;padding:0;}
+body{font-size:12px;font-family:'微软雅黑',Microsolft YaHei;}
+div,span,h1,h2,h3,h4,h5,h6,em,img,strong,sub,sup,tt,dd,dl,dt,form,label,table,caption,tbody,tfoot,thead,tr,th,td,ul,li,p,a{margin:0;padding:0;}
+img{border:none;}
+ul,li{ list-style-type:none;}
+a{text-decoration:none;color:#000;}
+.wrap{width:1000px;margin:0 auto;}
+.clearfix:after {content:".";display:block;height:0;clear:both;visibility:hidden;} 
+.clearfix {zoom:1;}
+.z {float:left;}
+.y {float:right;}
+.mlr10{margin-left:10px;margin-right:10px;}
+.mt5{margin-top:5px;}
+.mt7{margin-top:7px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.ml15{margin-left:15px;}
+.pd10{padding-bottom:10px;}
+
+.mp0{padding:0;margin:0;}
+.undisplay{display:none;}
+.display{display:block;}
+.f_l{float:left;}
+.f_r{float:right;}
+.relative{position:relative;}
+.f100{font-size:100px;}
+.f30{font-size:30px;}
+.f24{font-size:24px;color:#999;}
+.f14{font-size:14px;color:#666;}
+
+.w1100{width:1100px;margin:0 auto;overflow:hidden;}
+.w770{width:770px;background:#fff;overflow:hidden;}
+.w750{width:750px;overflow:hidden;}
+.w550{width:550px;overflow:hidden;}
+.w500{width:500px;overflow:hidden;}
+.w240{width:240px;background:#fff;overflow:hidden;}
+.w230{width:230px;background:#fff;overflow:hidden;}
+.w220{width:220px;background:#fff;overflow:hidden;}
+.w120{width:120px;overflow:hidden;}
+.w80{width:80px;}
+.w50{width:50px;}
+
+.p10{padding:10px;}
+.ml10{margin-left:10px;}
+.mr10{margin-right:10px;}
+
+.shadow{box-shadow:1px 1px 1px #ccc;}
+
+.redline{background:#f69;height:2px;overflow:hidden;}
+.c{text-align:center;}
+.r{text-align:right;}
+.l{text-align:left;}
+
+table{border-collapse:collapse;border-spacing:0;}
+.table{border-bottom:1px solid #CBE9F3;}
+.table th,.table td{padding:10px 5px;font-weight:normal;}
+.table  td{border-top:1px dotted #CBE9F3;}
+.table  td.operate a{padding:0 3px;}
+.table  th.td_center,.table  td.td_center{text-align:center;}
+.table  th.td_left,.table  td.td_left{text-align:left;}
+.table  th.td_right,.table  td.td_right{text-align:right;}
+
+.display{display:block;}
